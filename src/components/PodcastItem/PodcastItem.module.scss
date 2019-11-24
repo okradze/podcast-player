@@ -1,0 +1,32 @@
+@import '../../utils';
+
+.Item {
+    display: flex;
+}
+.Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.Image {
+    height: 15rem;
+    border-radius: 3rem;
+    margin-right: 3rem;
+}
+
+.Publisher {
+    color: $light-text;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.Button {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    border: 1px solid $primary;
+    border-radius: 100px;
+    color: $primary;
+    text-decoration: none;
+    align-self: flex-start;
+}

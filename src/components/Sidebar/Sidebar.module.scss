@@ -1,0 +1,62 @@
+@import '../../utils';
+
+.Sidebar {
+    position: fixed;
+    width: 20rem;
+}
+
+.Nav {
+    height: 100%;
+}
+
+.Logo {
+    font-size: 2.8rem;
+    padding-left: 2rem;
+    margin-bottom: 10rem;
+}
+
+.LogoLink {
+    color: $primary;
+    text-decoration: none;
+}
+
+.Title {
+    color: $light-text;
+    padding: 0 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.ListItem {
+    list-style: none;
+    display: flex;
+    margin: 1rem 0;
+}
+
+.Link {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    color: $text;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+}
+
+.LinkIcon {
+    fill: $text;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1rem;
+}
+
+.ActiveLink {
+    background-color: $text;
+    color: $offset;
+    border-radius: 100px;
+
+    .LinkIcon {
+        fill: $offset;
+    }
+}

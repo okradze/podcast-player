@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { listenNotesApi } from '../../axios'
+import styles from './PodcastList.module.scss'
 
 import PodcastItem from '../PodcastItem/PodcastItem'
 
@@ -837,11 +838,11 @@ const PodcastList = () => {
 
     return (
         <div>
-            Podcasts
-            <div>
+            <h2 className={styles.Title}>Popular Podcasts</h2>
+            <div className={styles.PodcastList}>
                 {podcasts &&
-                    podcasts.map(({ id, ...podcast }) => (
-                        <PodcastItem key={id} {...podcast} />
+                    podcasts.map((podcast) => (
+                        <PodcastItem key={podcast.id} {...podcast} />
                     ))}
             </div>
         </div>

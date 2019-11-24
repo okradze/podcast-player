@@ -1,0 +1,17 @@
+@import '../../utils';
+
+.Button {
+    text-align: center;
+    padding: 1rem 2rem;
+    background-color: $primary;
+    color: $offset;
+    border: none;
+    border-radius: 100px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.Inverted {
+    background-color: $offset;
+    color: $primary;
+}

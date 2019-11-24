@@ -1,0 +1,24 @@
+@import '../../utils';
+
+.Thumbnail {
+    height: 20rem;
+    border-radius: 3rem;
+    margin-right: 3rem;
+}
+
+.Content {
+    display: flex;
+    margin-bottom: 4rem;
+}
+
+.Title {
+    margin-bottom: 3rem;
+}
+
+.Publisher {
+    margin-bottom: 2rem;
+}
+
+.Text {
+    font-size: 1.5rem;
+}

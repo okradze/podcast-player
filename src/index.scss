@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+@import './utils';
 @import-normalize;
 
 *,
@@ -16,13 +18,27 @@ html {
 }
 
 body {
+    font-family: 'Open Sans', Helvetica, sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
-    font-family: Helvetica, sans-serif;
+    color: $text;
+    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 h1 {
     margin: 0;
+}
+
+.App {
+    display: grid;
+    grid-template-columns: 20rem auto;
+    grid-column-gap: 4rem;
+    padding: 4rem 2rem;
+}
+
+.main-page {
+    grid-column-start: 2;
 }
 
 .container {
