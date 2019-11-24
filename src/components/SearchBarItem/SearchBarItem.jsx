@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './SearchBarItem.module.scss'
 
 const SearchBarItem = ({
@@ -6,15 +7,20 @@ const SearchBarItem = ({
     thumbnail,
     publisher_original,
     title_original,
+    clearSearch,
 }) => (
     <li className={styles.Item} key={id}>
-        <a className={styles.Link} href=''>
+        <Link
+            onClick={() => clearSearch()}
+            to={`/podcast/${id}`}
+            className={styles.Link}
+        >
             <img className={styles.Image} src={thumbnail} alt='' />
             <div>
                 <h4 className={styles.Title}>{title_original}</h4>
                 <p className={styles.Publisher}>{publisher_original}</p>
             </div>
-        </a>
+        </Link>
     </li>
 )
 
