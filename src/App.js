@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Sidebar from './components/Sidebar/Sidebar'
 import Homepage from './pages/Homepage/Homepage'
+import Discoverpage from './pages/Discoverpage/Discoverpage'
 import Podcastpage from './pages/Podcastpage/Podcastpage'
 
 const App = () => (
@@ -15,10 +16,7 @@ const App = () => (
                     <Header />
                     <Switch>
                         <Route exact path='/' component={Homepage} />
-                        <Route
-                            path='/discover'
-                            component={() => <p>Discover</p>}
-                        />
+                        <Route path='/discover' component={Discoverpage} />
                         <Route
                             exact
                             path='/podcast/:podcastId'

@@ -3,16 +3,39 @@
 .Item {
     display: flex;
 }
+
 .Content {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.Image {
+.ImageWrapper {
     height: 15rem;
+    width: 15rem;
+    background-color: $bg;
     border-radius: 3rem;
+    overflow: hidden;
     margin-right: 3rem;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.Image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.Title,
+.Publisher {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
 }
 
 .Publisher {
@@ -30,4 +53,21 @@
     text-decoration: none;
     align-self: flex-start;
     font-size: 1.5rem;
+}
+
+.Slider {
+    flex-direction: column;
+
+    .Image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .Publisher {
+        font-size: 1.3rem;
+    }
+
+    .Title {
+        font-size: 1.5rem;
+    }
 }

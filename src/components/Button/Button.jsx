@@ -3,7 +3,7 @@ import styles from './Button.module.scss'
 
 const Button = ({ children, inverted, ...otherProps }) => (
     <button
-        className={`${styles.Button} ${inverted && styles.Inverted}`}
+        className={`${styles.Button} ${inverted ? styles.Inverted : ''}`}
         {...otherProps}
     >
         {children}

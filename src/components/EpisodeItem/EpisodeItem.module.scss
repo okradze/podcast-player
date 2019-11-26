@@ -14,9 +14,28 @@
     }
 }
 
-.Image {
+.Content {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ImageWrapper {
+    width: 4rem;
     height: 4rem;
+    position: relative;
     margin-right: 2rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: $offset;
+}
+
+.Image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .Title {
@@ -30,9 +49,10 @@
 }
 
 .Play {
+    flex-shrink: 0;
     width: 3.5rem;
     height: 3.5rem;
+    margin-left: 2rem;
     fill: #0dad3d;
-    margin-left: auto;
     cursor: pointer;
 }

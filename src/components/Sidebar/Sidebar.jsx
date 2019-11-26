@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 
 import { ReactComponent as HomeIcon } from '../../assets/home.svg'
 import { ReactComponent as SearchIcon } from '../../assets/search.svg'
+import { ReactComponent as PodcastIcon } from '../../assets/podcast.svg'
 import styles from './Sidebar.module.scss'
 
 const Sidebar = () => (
@@ -34,6 +35,16 @@ const Sidebar = () => (
                     >
                         <SearchIcon className={styles.LinkIcon} />
                         Discover
+                    </NavLink>
+                </li>
+                <li className={styles.ListItem}>
+                    <NavLink
+                        to='/podcast'
+                        className={styles.Link}
+                        activeClassName={styles.ActiveLink}
+                    >
+                        <PodcastIcon className={styles.LinkIcon} />
+                        Recent Podcast
                     </NavLink>
                 </li>
             </ul>

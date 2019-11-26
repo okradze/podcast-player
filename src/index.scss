@@ -15,6 +15,16 @@ html {
     box-sizing: border-box;
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f4f4f4;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
 }
 
 body {
@@ -42,7 +52,13 @@ h1 {
 }
 
 .container {
-    max-width: 1200px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
+    }
 }

@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { listenNotesApi } from '../../axios'
+
+import PodcastList from '../../components/PodcastList/PodcastList'
 import EpisodeList from '../../components/EpisodeList/EpisodeList'
 import styles from './Podcastpage.module.scss'
 
 const Podcastpage = ({ match }) => {
     const [podcast, setPodcast] = useState()
+    const [recommendations, setRecommendations] = useState()
     const [paginationInfo, setPaginationInfo] = useState('')
+
+    const { podcastId } = match.params
+
+    useEffect(() => {
+        return () => {
+            setPaginationInfo('')
+            setPodcast()
+            setRecommendations()
+        }
+    }, [podcastId])
 
     useEffect(() => {
         const fetchPodcast = async () => {
             const { data } = await listenNotesApi.get(
-                `/podcasts/${match.params.podcastId}?next_episode_pub_date=${paginationInfo}`,
+                `/podcasts/${podcastId}?next_episode_pub_date=${paginationInfo}`,
             )
             setPodcast((prevState = { episodes: [] }) => ({
                 ...data,
@@ -18,12 +31,17 @@ const Podcastpage = ({ match }) => {
             }))
         }
         fetchPodcast()
+    }, [podcastId, paginationInfo])
 
-        return () => {
-            setPodcast()
-            setPaginationInfo('')
+    useEffect(() => {
+        const fetchRecommendations = async () => {
+            const { data } = await listenNotesApi.get(
+                `/podcasts/${podcastId}/recommendations`,
+            )
+            setRecommendations(data.recommendations)
         }
-    }, [match.params.podcastId, paginationInfo])
+        fetchRecommendations()
+    }, [podcastId])
 
     const loadMoreEpisodes = () => {
         const nextEpisodePubDate = podcast.next_episode_pub_date
@@ -39,7 +57,13 @@ const Podcastpage = ({ match }) => {
             <div>
                 <h2 className={styles.Title}>{title}</h2>
                 <div className={styles.Content}>
-                    <img className={styles.Thumbnail} src={thumbnail} alt='' />
+                    <div className={styles.ThumbnailWrapper}>
+                        <img
+                            className={styles.Thumbnail}
+                            src={thumbnail}
+                            alt=''
+                        />
+                    </div>
                     <div>
                         <h3 className={styles.Publisher}>{publisher}</h3>
                         <p className={styles.Text}>{description}</p>
@@ -50,6 +74,13 @@ const Podcastpage = ({ match }) => {
                     loadMoreEpisodes={loadMoreEpisodes}
                     episodes={episodes}
                 />
+
+                {recommendations && (
+                    <PodcastList
+                        podcasts={recommendations}
+                        title='Recommendations'
+                    />
+                )}
             </div>
         )
     } else {

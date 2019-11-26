@@ -1,9 +1,21 @@
 @import '../../utils';
 
-.Thumbnail {
+.ThumbnailWrapper {
+    position: relative;
+    width: 20rem;
     height: 20rem;
     border-radius: 3rem;
     margin-right: 3rem;
+    overflow: hidden;
+    background: $bg;
+    flex-shrink: 0;
+}
+
+.Thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .Content {
