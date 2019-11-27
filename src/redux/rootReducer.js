@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import podcastsReducer from './podcasts/podcastsReducer'
-import podcastReducer from './podcast/podcastReducer'
+import discoverReducer from './discover/discoverReducer'
 
 const rootReducer = combineReducers({
-    podcast: podcastReducer,
     podcasts: podcastsReducer,
+    discover: discoverReducer,
 })
 
 export default rootReducer

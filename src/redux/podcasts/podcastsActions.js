@@ -16,9 +16,9 @@ export const startFetchPodcasts = () => ({
 
 export const fetchPodcasts = page => {
     return async (dispatch, getState) => {
-        const podcasts = getState().podcasts.podcasts.length
+        const lastFetchedPage = getState().podcasts.lastFetchedPage
 
-        if (page > 1 || !podcasts) {
+        if (page > lastFetchedPage) {
             dispatch(startFetchPodcasts())
 
             const { data } = await listenNotesApi.get(
