@@ -1,46 +1,64 @@
-import React, { useState, useEffect } from 'react'
-import { listenNotesApi } from '../../axios'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
+import { fetchPodcasts, nextPage } from '../../redux/podcasts/podcastsActions'
+import {
+    selectPodcasts,
+    selectIsFetching,
+    selectCurrentPage,
+    selectHasNextPage,
+} from '../../redux/podcasts/podcastsSelectors'
 import Button from '../../components/Button/Button'
 import PodcastList from '../../components/PodcastList/PodcastList'
 
-const Homepage = () => {
-    const [podcasts, setPodcasts] = useState({
-        podcasts: [],
-    })
-    const [page, setPage] = useState(1)
-
+const Homepage = ({
+    fetchPodcasts,
+    nextPage,
+    page,
+    hasNextPage,
+    isFetching,
+    podcasts,
+}) => {
     useEffect(() => {
-        const fetchPodcasts = async () => {
-            const { data } = await listenNotesApi.get(
-                `/best_podcasts?page=${page}`,
-            )
-            setPodcasts(prevState => ({
-                ...data,
-                podcasts: [...prevState.podcasts, ...data.podcasts],
-            }))
-        }
-        fetchPodcasts()
-    }, [page])
+        fetchPodcasts(page)
+    }, [fetchPodcasts, page])
 
     const loadMorePodcasts = () => {
-        if (podcasts.has_next) {
-            setPage(page + 1)
-        }
+        nextPage()
     }
 
-    return podcasts ? (
+    return (
         <div>
-            <PodcastList
-                needsLoadMoreButton
-                podcasts={podcasts.podcasts}
-                loadMorePodcasts={loadMorePodcasts}
-            />
-            <Button onClick={() => loadMorePodcasts()}>Load More</Button>
+            {podcasts && (
+                <PodcastList
+                    needsLoadMoreButton
+                    podcasts={podcasts}
+                    loadMorePodcasts={loadMorePodcasts}
+                />
+            )}
+
+            {isFetching ? (
+                <div>Loading...</div>
+            ) : (
+                hasNextPage && (
+                    <Button onClick={loadMorePodcasts}>Load More</Button>
+                )
+            )}
         </div>
-    ) : (
-        <div>Loading...</div>
     )
 }
 
-export default Homepage
+const mapStateToProps = createStructuredSelector({
+    isFetching: selectIsFetching,
+    page: selectCurrentPage,
+    podcasts: selectPodcasts,
+    hasNextPage: selectHasNextPage,
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchPodcasts: page => dispatch(fetchPodcasts(page)),
+    nextPage: () => dispatch(nextPage()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage)
