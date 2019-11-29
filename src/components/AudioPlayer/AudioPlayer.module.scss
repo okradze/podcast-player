@@ -1,0 +1,44 @@
+@import '../../utils';
+
+.AudioPlayer {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $bg;
+    display: flex;
+    align-items: center;
+    z-index: 20;
+    padding: 1rem 3rem;
+}
+
+.ThumbnailWrapper {
+    position: relative;
+    overflow: hidden;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+}
+
+.Thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.Play,
+.Pause {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.Play {
+    fill: #0dad3d;
+}
+
+.Pause {
+    fill: #eb9524;
+}

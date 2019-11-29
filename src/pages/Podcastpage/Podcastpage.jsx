@@ -70,10 +70,12 @@ const Podcastpage = ({ match }) => {
                     </div>
                 </div>
 
-                <EpisodeList
-                    loadMoreEpisodes={loadMoreEpisodes}
-                    episodes={episodes}
-                />
+                <div className={styles.EpisodeList}>
+                    <EpisodeList
+                        loadMoreEpisodes={loadMoreEpisodes}
+                        episodes={episodes}
+                    />
+                </div>
 
                 {recommendations && (
                     <PodcastList
