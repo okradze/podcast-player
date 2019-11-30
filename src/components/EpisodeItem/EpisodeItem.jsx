@@ -26,6 +26,8 @@ const EpisodeItem = ({ match, playEpisode, episode }) => {
                 </div>
 
                 <PlayButton
+                    role='button'
+                    tabIndex='0'
                     className={styles.Play}
                     onClick={() => playEpisode(match.params.podcastId, episode)}
                 />

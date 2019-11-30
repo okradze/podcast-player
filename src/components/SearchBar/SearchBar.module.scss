@@ -9,10 +9,11 @@
     font-size: 1.5rem;
     border-radius: 100px;
     width: 100%;
-    border: 1px solid $bg;
+    border: 1px solid $light-border;
 
     &:focus {
         outline: none;
+        border-color: $primary;
     }
 }
 

@@ -15,6 +15,13 @@
     width: 100%;
     text-decoration: none;
     color: $text;
+    transition: background-color 0.15s ease-in-out;
+
+    &:focus,
+    &:hover {
+        outline: 0;
+        background-color: $bg-2;
+    }
 }
 
 .Image {

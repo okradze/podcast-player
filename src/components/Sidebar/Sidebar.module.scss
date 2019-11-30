@@ -18,6 +18,11 @@
 .LogoLink {
     color: $primary;
     text-decoration: none;
+
+    &:focus {
+        outline: 2px solid $primary;
+        outline-offset: 5px;
+    }
 }
 
 .Title {
@@ -42,6 +47,14 @@
     font-weight: 600;
     font-size: 1.4rem;
     padding: 1rem 2rem;
+    border: 2px solid transparent;
+    border-radius: 100px;
+    transition: border-color 0.15s ease-in-out;
+
+    &:focus {
+        outline: none;
+        border-color: $secondary;
+    }
 }
 
 .LinkIcon {
@@ -52,9 +65,8 @@
 }
 
 .ActiveLink {
-    background-color: $text;
+    background-color: $secondary;
     color: $offset;
-    border-radius: 100px;
 
     .LinkIcon {
         fill: $offset;

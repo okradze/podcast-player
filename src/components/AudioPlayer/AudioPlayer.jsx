@@ -63,11 +63,13 @@ const AudioPlayer = ({
             <div className={styles.ControllsWrapper}>
                 {isPlaying ? (
                     <PauseButton
+                        tabIndex='0'
                         onClick={() => audio.current.pause()}
                         className={styles.Pause}
                     />
                 ) : (
                     <PlayButton
+                        tabIndex='0'
                         onClick={() => audio.current.play()}
                         className={styles.Play}
                     />
@@ -87,9 +89,10 @@ const AudioPlayer = ({
                     />
                 </div>
 
-                <div className={styles.VolumeWrapper}>
+                <div tabIndex='0' className={styles.VolumeWrapper}>
                     <div className={styles.VolumeSlider}>
                         <Slider
+                            tabIndex='1'
                             onChange={value => {
                                 audio.current.volume = value
                                 setVolume(value)
@@ -99,6 +102,7 @@ const AudioPlayer = ({
                             min={0.0}
                             max={1.0}
                             vertical
+                            className={styles.Slider}
                         />
                     </div>
                     <VolumeIcon className={styles.VolumeIcon} />

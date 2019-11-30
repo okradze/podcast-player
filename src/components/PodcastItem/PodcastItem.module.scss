@@ -45,7 +45,7 @@
 }
 
 .Button {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
     text-align: center;
     border: 1px solid $primary;
     border-radius: 100px;
@@ -53,6 +53,14 @@
     text-decoration: none;
     align-self: flex-start;
     font-size: 1.5rem;
+    font-weight: 600;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+
+    &:focus {
+        outline: 0;
+        color: $offset;
+        background-color: $primary;
+    }
 }
 
 .Slider {

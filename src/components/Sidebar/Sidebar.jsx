@@ -44,7 +44,9 @@ const Sidebar = ({ recentPodcastId }) => (
                     <NavLink
                         to={`/podcast/${recentPodcastId}`}
                         className={styles.Link}
-                        activeClassName={styles.ActiveLink}
+                        activeClassName={
+                            recentPodcastId ? styles.ActiveLink : ''
+                        }
                     >
                         <PodcastIcon className={styles.LinkIcon} />
                         Recent Podcast

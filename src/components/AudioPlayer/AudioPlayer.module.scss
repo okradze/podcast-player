@@ -6,8 +6,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: $bg;
-    // display: flex;
+    background-color: $bg;
     align-items: center;
     z-index: 20;
     padding: 1rem 3rem;
@@ -21,13 +20,14 @@
 }
 
 .ThumbnailWrapper {
-    margin-right: 1rem;
+    margin-right: 2rem;
     position: relative;
     overflow: hidden;
     width: 4rem;
     height: 4rem;
     border-radius: 0.5rem;
     background-color: $offset;
+    flex-shrink: 0;
 }
 
 .Thumbnail {
@@ -38,10 +38,15 @@
 }
 
 .Title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: $text;
     text-decoration: none;
-    font-weight: 600;
+
+    &:focus {
+        outline: 2px solid $primary;
+        outline-offset: 2px;
+    }
 }
 
 .ControllsWrapper {
@@ -62,14 +67,14 @@
     width: 3rem;
     height: 3rem;
     cursor: pointer;
-}
+    transition: box-shadow 0.15s ease-in-out;
+    border-radius: 50%;
+    fill: $primary;
 
-.Play {
-    fill: #0dad3d;
-}
-
-.Pause {
-    fill: #eb9524;
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 2px $offset, 0 0 0 4px $primary;
+    }
 }
 
 .VolumeWrapper {
@@ -77,7 +82,9 @@
     display: flex;
     align-items: center;
 
-    &:hover .VolumeSlider {
+    &:hover,
+    &:focus .VolumeSlider {
+        outline: 0;
         visibility: visible;
         opacity: 1;
     }
@@ -105,13 +112,16 @@
 
 .Slider {
     :global(.rc-slider-track) {
-        background-color: $primary;
+        background-color: $secondary;
     }
     :global(.rc-slider-handle) {
         background-color: $offset;
         border: 2px solid $primary;
 
         &:hover {
+            border-color: $primary;
+        }
+        &:focus {
             border-color: $primary;
         }
     }
