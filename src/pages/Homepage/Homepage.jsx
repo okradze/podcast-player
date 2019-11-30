@@ -11,6 +11,7 @@ import {
 } from '../../redux/podcasts/podcastsSelectors'
 import Button from '../../components/Button/Button'
 import PodcastList from '../../components/PodcastList/PodcastList'
+import Spinner from '../../components/Spinner/Spinner'
 
 const Homepage = ({
     fetchPodcasts,
@@ -37,13 +38,9 @@ const Homepage = ({
                     loadMorePodcasts={loadMorePodcasts}
                 />
             )}
-
-            {isFetching ? (
-                <div>Loading...</div>
-            ) : (
-                hasNextPage && (
-                    <Button onClick={loadMorePodcasts}>Load More</Button>
-                )
+            {isFetching && <Spinner />}
+            {hasNextPage && (
+                <Button onClick={loadMorePodcasts}>Load More</Button>
             )}
         </div>
     )

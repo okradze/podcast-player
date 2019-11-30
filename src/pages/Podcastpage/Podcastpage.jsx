@@ -3,6 +3,7 @@ import { listenNotesApi } from '../../axios'
 
 import PodcastList from '../../components/PodcastList/PodcastList'
 import EpisodeList from '../../components/EpisodeList/EpisodeList'
+import Spinner from '../../components/Spinner/Spinner'
 import styles from './Podcastpage.module.scss'
 
 const Podcastpage = ({ match }) => {
@@ -86,7 +87,7 @@ const Podcastpage = ({ match }) => {
             </div>
         )
     } else {
-        return <div>Loading...</div>
+        return <Spinner />
     }
 }
 

@@ -1,3 +1,5 @@
+@import '../../utils';
+
 .SearchBar {
     position: relative;
 }
@@ -6,24 +8,29 @@
     padding: 1.5rem 4rem;
     font-size: 1.5rem;
     border-radius: 100px;
-    border: 1px solid #ececec;
     width: 100%;
+    border: 1px solid $bg;
 
     &:focus {
         outline: none;
     }
 }
 
-.InputWithResults {
+.InputWhenSearching {
     border-radius: 25px 25px 0 0;
 }
 
 .Results {
-    background-color: #fff;
+    background-color: $offset;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    box-shadow: 2px 2px 4px rgba(#222, 0.15);
+    box-shadow: 0 0 2px 1px rgba($text, 0.15);
     z-index: 15;
+    border: 1px solid $bg;
+}
+
+.Spinner {
+    padding: 1rem 0;
 }

@@ -14,6 +14,7 @@ import {
 } from '../../redux/discover/discoverSelectors'
 import Button from '../../components/Button/Button'
 import PodcastList from '../../components/PodcastList/PodcastList'
+import Spinner from '../../components/Spinner/Spinner'
 
 const Discoverpage = ({
     fetchPodcastLists,
@@ -37,10 +38,10 @@ const Discoverpage = ({
                 lists.map(({ id, title, podcasts }) => (
                     <PodcastList key={id} title={title} podcasts={podcasts} />
                 ))}
+            {isFetching && <Spinner />}
             {hasNextPage && !isFetching && (
                 <Button onClick={() => loadMoreLists()}>Load More</Button>
             )}
-            {isFetching && <div>Loading...</div>}
         </div>
     )
 }
