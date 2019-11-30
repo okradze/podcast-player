@@ -1,12 +1,15 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
+import { selectRecentPodcastId } from '../../redux/podcast/podcastSelectors'
 import { ReactComponent as HomeIcon } from '../../assets/home.svg'
 import { ReactComponent as SearchIcon } from '../../assets/search.svg'
 import { ReactComponent as PodcastIcon } from '../../assets/podcast.svg'
 import styles from './Sidebar.module.scss'
 
-const Sidebar = () => (
+const Sidebar = ({ recentPodcastId }) => (
     <div className={styles.Sidebar}>
         <h1 className={styles.Logo}>
             <Link to='/' className={styles.LogoLink}>
@@ -39,7 +42,7 @@ const Sidebar = () => (
                 </li>
                 <li className={styles.ListItem}>
                     <NavLink
-                        to='/podcast'
+                        to={`/podcast/${recentPodcastId}`}
                         className={styles.Link}
                         activeClassName={styles.ActiveLink}
                     >
@@ -52,4 +55,8 @@ const Sidebar = () => (
     </div>
 )
 
-export default Sidebar
+const mapStateToProps = createStructuredSelector({
+    recentPodcastId: selectRecentPodcastId,
+})
+
+export default connect(mapStateToProps)(Sidebar)

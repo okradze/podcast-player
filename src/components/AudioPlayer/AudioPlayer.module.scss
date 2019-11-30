@@ -7,24 +7,53 @@
     right: 0;
     bottom: 0;
     background: $bg;
-    display: flex;
+    // display: flex;
     align-items: center;
     z-index: 20;
     padding: 1rem 3rem;
+    box-shadow: 0px -2px 4px 0px rgba($text, 0.15);
+}
+
+.EpisodeWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ThumbnailWrapper {
+    margin-right: 1rem;
     position: relative;
     overflow: hidden;
     width: 4rem;
     height: 4rem;
     border-radius: 0.5rem;
+    background-color: $offset;
 }
 
 .Thumbnail {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+}
+
+.Title {
+    font-size: 1.5rem;
+    color: $text;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.ControllsWrapper {
+    display: grid;
+    align-content: center;
+    grid-template-columns: min-content 1fr min-content;
+    grid-column-gap: 3rem;
+}
+
+.Duration {
+    display: flex;
+    align-items: center;
     width: 100%;
 }
 
@@ -41,4 +70,49 @@
 
 .Pause {
     fill: #eb9524;
+}
+
+.VolumeWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:hover .VolumeSlider {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.VolumeSlider {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 10rem;
+    visibility: hidden;
+    opacity: 0;
+    background-color: $offset;
+    padding: 1.5rem 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px rgba($text, 0.15);
+}
+
+.VolumeIcon {
+    width: 2rem;
+    height: 2rem;
+    fill: $primary;
+}
+
+.Slider {
+    :global(.rc-slider-track) {
+        background-color: $primary;
+    }
+    :global(.rc-slider-handle) {
+        background-color: $offset;
+        border: 2px solid $primary;
+
+        &:hover {
+            border-color: $primary;
+        }
+    }
 }

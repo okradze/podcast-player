@@ -1,3 +1,6 @@
 export const PLAY_EPISODE = 'podcast/PLAY_EPISODE'
 export const TOGGLE_PLAY = 'podcast/TOGGLE_PLAY'
 export const SET_VOLUME = 'podcast/SET_VOLUME'
+export const PLAY = 'podcast/PLAY'
+export const PAUSE = 'podcast/PAUSE'
+export const CURRENT_TIME = 'podcast/CURRENT_TIME'

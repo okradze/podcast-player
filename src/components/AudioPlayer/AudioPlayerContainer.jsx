@@ -8,8 +8,14 @@ import {
     selectRecentPodcastId,
     selectIsPlaying,
     selectVolume,
+    selectCurrentTime,
 } from '../../redux/podcast/podcastSelectors'
-import { togglePlay, setVolume } from '../../redux/podcast/podcastActions'
+import {
+    pause,
+    play,
+    setVolume,
+    setCurrentTime,
+} from '../../redux/podcast/podcastActions'
 
 const AudioPlayerContainer = props => {
     if (props.episode) {
@@ -24,11 +30,14 @@ const mapStateToProps = createStructuredSelector({
     podcastId: selectRecentPodcastId,
     isPlaying: selectIsPlaying,
     volume: selectVolume,
+    currentTime: selectCurrentTime,
 })
 
 const mapDispatchToProps = dispatch => ({
-    togglePlay: () => dispatch(togglePlay()),
+    pause: () => dispatch(pause()),
+    play: () => dispatch(play()),
     setVolume: volume => dispatch(setVolume(volume)),
+    setCurrentTime: time => dispatch(setCurrentTime(time)),
 })
 
 export default connect(

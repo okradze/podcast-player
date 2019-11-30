@@ -1,35 +1,109 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import Howler from 'react-howler'
+import Slider from 'rc-slider/lib/Slider'
 
 import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import { ReactComponent as PauseButton } from '../../assets/pause-button.svg'
+import { ReactComponent as VolumeIcon } from '../../assets/volume.svg'
 import styles from './AudioPlayer.module.scss'
+import 'rc-slider/assets/index.css'
 
 const AudioPlayer = ({
     episode,
     podcastId,
-    togglePlay,
     isPlaying,
+    currentTime,
     volume,
+    play,
+    pause,
     setVolume,
+    setCurrentTime,
 }) => {
-    const { thumbnail, title, audio } = episode
+    const { thumbnail, title, audio: audioSrc, audio_length_sec } = episode
+    const audio = useRef(new Audio())
+
+    useEffect(() => {
+        audio.current.src = audioSrc
+        audio.current.currentTime = currentTime
+
+        const pauseEvent = audio.current.addEventListener('pause', () => {
+            pause()
+        })
+        const playEvent = audio.current.addEventListener('play', () => {
+            play()
+        })
+        const timeUpdateEvent = audio.current.addEventListener(
+            'timeupdate',
+            () => {
+                setCurrentTime(audio.current.currentTime)
+            },
+        )
+
+        audio.current.play()
+
+        return () => {
+            audio.current.removeEventListener('pause', pauseEvent)
+            audio.current.removeEventListener('play', playEvent)
+            audio.current.removeEventListener('timeupdate', timeUpdateEvent)
+        }
+    }, [audioSrc, play, pause, setCurrentTime])
 
     return (
         <div className={styles.AudioPlayer}>
-            <Howler html5 src={audio} playing={isPlaying} volume={volume} />
-            <div className={styles.ThumbnailWrapper}>
-                <img className={styles.Thumbnail} src={thumbnail} alt='' />
+            <div className={styles.EpisodeWrapper}>
+                <div className={styles.ThumbnailWrapper}>
+                    <img className={styles.Thumbnail} src={thumbnail} alt='' />
+                </div>
+
+                <Link className={styles.Title} to={`/podcast/${podcastId}`}>
+                    {title}
+                </Link>
             </div>
-            <Link to={`/podcast/${podcastId}`}>
-                <h4 className={styles.Title}>{title}</h4>
-            </Link>
-            {isPlaying ? (
-                <PauseButton onClick={togglePlay} className={styles.Pause} />
-            ) : (
-                <PlayButton onClick={togglePlay} className={styles.Play} />
-            )}
+
+            <div className={styles.ControllsWrapper}>
+                {isPlaying ? (
+                    <PauseButton
+                        onClick={() => audio.current.pause()}
+                        className={styles.Pause}
+                    />
+                ) : (
+                    <PlayButton
+                        onClick={() => audio.current.play()}
+                        className={styles.Play}
+                    />
+                )}
+
+                <div className={styles.Duration}>
+                    <Slider
+                        onChange={value => {
+                            setCurrentTime(value)
+                            audio.current.currentTime = value
+                        }}
+                        value={currentTime}
+                        step={1}
+                        min={0}
+                        max={audio_length_sec}
+                        className={styles.Slider}
+                    />
+                </div>
+
+                <div className={styles.VolumeWrapper}>
+                    <div className={styles.VolumeSlider}>
+                        <Slider
+                            onChange={value => {
+                                audio.current.volume = value
+                                setVolume(value)
+                            }}
+                            value={volume}
+                            step={0.01}
+                            min={0.0}
+                            max={1.0}
+                            vertical
+                        />
+                    </div>
+                    <VolumeIcon className={styles.VolumeIcon} />
+                </div>
+            </div>
         </div>
     )
 }

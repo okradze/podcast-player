@@ -17,3 +17,8 @@ export const selectIsPlaying = createSelector(
 )
 
 export const selectVolume = createSelector([podcast], podcast => podcast.volume)
+
+export const selectCurrentTime = createSelector(
+    [podcast],
+    podcast => podcast.currentTime,
+)

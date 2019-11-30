@@ -1,4 +1,10 @@
-import { PLAY_EPISODE, TOGGLE_PLAY, SET_VOLUME } from './podcastTypes'
+import {
+    PLAY_EPISODE,
+    PLAY,
+    PAUSE,
+    SET_VOLUME,
+    CURRENT_TIME,
+} from './podcastTypes'
 
 export const playEpisode = (podcastId, episode) => ({
     type: PLAY_EPISODE,
@@ -13,6 +19,15 @@ export const setVolume = volume => ({
     payload: volume,
 })
 
-export const togglePlay = () => ({
-    type: TOGGLE_PLAY,
+export const setCurrentTime = time => ({
+    type: CURRENT_TIME,
+    payload: time,
+})
+
+export const pause = () => ({
+    type: PAUSE,
+})
+
+export const play = () => ({
+    type: PLAY,
 })
