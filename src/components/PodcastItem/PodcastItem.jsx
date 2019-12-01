@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 import styles from './PodcastItem.module.scss'
 
 const PodcastItem = ({ id, isInSlider, thumbnail, title, publisher }) => (
-    <div className={`${styles.Item} ${isInSlider && styles.Slider}`} key={id}>
+    <div
+        className={`${styles.Item} ${isInSlider ? styles.Slider : ''}`}
+        key={id}
+    >
         <div className={styles.ImageWrapper}>
             <img className={styles.Image} src={thumbnail} alt='' />
         </div>

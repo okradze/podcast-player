@@ -42,14 +42,23 @@ h1 {
 
 .App {
     display: grid;
-    grid-template-columns: 20rem auto;
+    grid-template-columns: 20rem 1fr;
     grid-column-gap: 4rem;
     padding: 4rem 2rem;
+
+    @media only screen and (max-width: 850px) {
+        grid-column-gap: 0;
+        grid-template-columns: 1fr;
+    }
 }
 
 .main-page {
     grid-column-start: 2;
     padding-bottom: 10rem;
+
+    @media only screen and (max-width: 850px) {
+        grid-column-start: 1;
+    }
 }
 
 .container {

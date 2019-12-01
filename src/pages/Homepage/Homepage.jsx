@@ -39,7 +39,7 @@ const Homepage = ({
                 />
             )}
             {isFetching && <Spinner />}
-            {hasNextPage && (
+            {!isFetching && hasNextPage && (
                 <Button onClick={loadMorePodcasts}>Load More</Button>
             )}
         </div>

@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .ThumbnailWrapper {
@@ -53,8 +53,18 @@
 .ControllsWrapper {
     display: grid;
     align-content: center;
-    grid-template-columns: repeat(2, min-content) 1fr repeat(2, min-content);
+    grid-template-columns: min-content 1fr min-content;
     grid-column-gap: 3rem;
+
+    @media only screen and (max-width: 576px) {
+        grid-template-rows: repeat(2, min-content);
+    }
+}
+
+.DurationWrapper {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    grid-gap: 2rem;
 }
 
 .Duration {

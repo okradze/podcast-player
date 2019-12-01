@@ -9,6 +9,10 @@
     overflow: hidden;
     background: $bg;
     flex-shrink: 0;
+
+    @media only screen and (max-width: 576px) {
+        margin-bottom: 2rem;
+    }
 }
 
 .Thumbnail {
@@ -21,6 +25,10 @@
 .Content {
     display: flex;
     margin-bottom: 4rem;
+
+    @media only screen and (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .EpisodeList {

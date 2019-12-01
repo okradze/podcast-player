@@ -3,6 +3,85 @@
 .Sidebar {
     position: fixed;
     width: 20rem;
+
+    @media only screen and (max-width: 850px) {
+        padding: 8rem 2rem 0 2rem;
+        background-color: $offset;
+        box-shadow: 2px 0 4px rgba($text, 0.15);
+        z-index: 20;
+        top: 0;
+        left: 0;
+        height: 100%;
+        box-sizing: content-box;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+}
+
+.Toggle {
+    display: none;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    background-color: $primary;
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 30;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 2rem 1px rgba($text, 0.2);
+
+    @media only screen and (max-width: 850px) {
+        display: flex;
+    }
+}
+
+.ToggleIcon,
+.ToggleIcon::before,
+.ToggleIcon::after {
+    display: inline-block;
+    width: 2.5rem;
+    height: 2px;
+    background-color: $offset;
+    border-radius: 1rem;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
+        top 0.3s ease-in-out;
+}
+
+.ToggleIcon {
+    cursor: pointer;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+    }
+
+    &::before {
+        top: -0.8rem;
+    }
+    &::after {
+        top: 0.8rem;
+    }
+}
+
+.ToggleIconWhenVisible {
+    background-color: transparent;
+
+    &::before {
+        transform: rotate(135deg);
+        top: 0;
+    }
+    &::after {
+        top: 0;
+        transform: rotate(-135deg);
+    }
+}
+
+.SidebarMobileVisible {
+    transform: translateX(0);
 }
 
 .Nav {
@@ -13,6 +92,13 @@
     font-size: 2.8rem;
     padding-left: 2rem;
     margin-bottom: 10rem;
+
+    @media only screen and (max-width: 576px) {
+        margin-bottom: 6rem;
+    }
+    @media only screen and (max-width: 400px) {
+        margin-bottom: 4rem;
+    }
 }
 
 .LogoLink {

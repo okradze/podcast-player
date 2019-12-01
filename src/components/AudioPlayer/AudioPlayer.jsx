@@ -87,28 +87,32 @@ const AudioPlayer = ({
                     />
                 )}
 
-                <span className={styles.Time}>{formatTime(currentTime)}</span>
+                <div className={styles.DurationWrapper}>
+                    <span className={styles.Time}>
+                        {formatTime(currentTime)}
+                    </span>
 
-                <div className={styles.Duration}>
-                    <Slider
-                        onChange={value => {
-                            setCurrentTime(value)
-                            audio.current.currentTime = value
-                        }}
-                        value={currentTime}
-                        step={1}
-                        min={0}
-                        max={audio_length_sec}
-                        className={styles.Slider}
-                    />
+                    <div className={styles.Duration}>
+                        <Slider
+                            onChange={value => {
+                                setCurrentTime(value)
+                                audio.current.currentTime = value
+                            }}
+                            value={currentTime}
+                            step={1}
+                            min={0}
+                            max={audio_length_sec}
+                            className={styles.Slider}
+                        />
+                    </div>
+
+                    <span className={styles.Time}>
+                        -
+                        {formatTime(
+                            audio.current.duration - audio.current.currentTime,
+                        )}
+                    </span>
                 </div>
-
-                <span className={styles.Time}>
-                    -
-                    {formatTime(
-                        audio.current.duration - audio.current.currentTime,
-                    )}
-                </span>
 
                 <div tabIndex={1} className={styles.VolumeWrapper}>
                     <div className={styles.VolumeSlider}>
