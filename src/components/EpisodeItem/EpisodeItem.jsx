@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { playEpisode } from '../../redux/podcast/podcastActions'
+import { playEpisode } from '../../redux/playing/playingActions'
 import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import styles from './EpisodeItem.module.scss'
 

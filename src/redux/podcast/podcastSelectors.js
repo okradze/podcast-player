@@ -2,23 +2,37 @@ import { createSelector } from 'reselect'
 
 const podcast = state => state.podcast
 
-export const selectRecentPodcastId = createSelector(
+export const selectPodcast = createSelector(
     [podcast],
-    podcast => podcast.podcastId,
-)
-export const selectPlayingEpisode = createSelector(
-    [podcast],
-    podcast => podcast.playingEpisode,
+    podcast => podcast.podcast,
 )
 
-export const selectIsPlaying = createSelector(
+export const selectRecommendations = createSelector(
     [podcast],
-    podcast => podcast.isPlaying,
+    podcast => podcast.recommendations,
 )
 
-export const selectVolume = createSelector([podcast], podcast => podcast.volume)
-
-export const selectCurrentTime = createSelector(
+export const selectIsPodcastFetching = createSelector(
     [podcast],
-    podcast => podcast.currentTime,
+    podcast => podcast.isPodcastFetching,
+)
+
+export const selectAreRecommendationsFetching = createSelector(
+    [podcast],
+    podcast => podcast.areRecommendationsFetching,
+)
+
+export const selectAreEpisodesFetching = createSelector(
+    [podcast],
+    podcast => podcast.areEpisodesFetching,
+)
+
+export const selectEpisodes = createSelector(
+    [podcast],
+    podcast => podcast.podcast.episodes,
+)
+
+export const selectAreMoreEpisodes = createSelector(
+    [podcast],
+    podcast => !!podcast.podcast.next_episode_pub_date,
 )

@@ -3,13 +3,13 @@ import { NavLink, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { selectRecentPodcastId } from '../../redux/podcast/podcastSelectors'
+import { selectPlayingPodcastId } from '../../redux/playing/playingSelectors'
 import { ReactComponent as HomeIcon } from '../../assets/home.svg'
 import { ReactComponent as SearchIcon } from '../../assets/search.svg'
 import { ReactComponent as PodcastIcon } from '../../assets/podcast.svg'
 import styles from './Sidebar.module.scss'
 
-const Sidebar = ({ recentPodcastId }) => (
+const Sidebar = ({ playingPodcastId }) => (
     <div className={styles.Sidebar}>
         <h1 className={styles.Logo}>
             <Link to='/' className={styles.LogoLink}>
@@ -42,14 +42,14 @@ const Sidebar = ({ recentPodcastId }) => (
                 </li>
                 <li className={styles.ListItem}>
                     <NavLink
-                        to={`/podcast/${recentPodcastId}`}
+                        to={`/podcast/${playingPodcastId}`}
                         className={styles.Link}
                         activeClassName={
-                            recentPodcastId ? styles.ActiveLink : ''
+                            playingPodcastId ? styles.ActiveLink : ''
                         }
                     >
                         <PodcastIcon className={styles.LinkIcon} />
-                        Recent Podcast
+                        Now Playing
                     </NavLink>
                 </li>
             </ul>
@@ -58,7 +58,7 @@ const Sidebar = ({ recentPodcastId }) => (
 )
 
 const mapStateToProps = createStructuredSelector({
-    recentPodcastId: selectRecentPodcastId,
+    playingPodcastId: selectPlayingPodcastId,
 })
 
 export default connect(mapStateToProps)(Sidebar)

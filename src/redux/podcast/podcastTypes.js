@@ -1,6 +1,8 @@
-export const PLAY_EPISODE = 'podcast/PLAY_EPISODE'
-export const TOGGLE_PLAY = 'podcast/TOGGLE_PLAY'
-export const SET_VOLUME = 'podcast/SET_VOLUME'
-export const PLAY = 'podcast/PLAY'
-export const PAUSE = 'podcast/PAUSE'
-export const CURRENT_TIME = 'podcast/CURRENT_TIME'
+export const START_FETCH_PODCAST = 'podcast/START_FETCH_PODCAST'
+export const SET_PODCAST = 'podcast/SET_PODCAST'
+
+export const START_FETCH_MORE_EPISODES = 'podcast/START_FETCH_MORE_EPISODES'
+export const SET_MORE_EPISODES = 'podcast/SET_MORE_EPISODES'
+
+export const START_FETCH_RECOMMENDATIONS = 'podcast/START_FETCH_RECOMMENDATIONS'
+export const SET_RECOMMENDATIONS = 'podcast/SET_RECOMMENDATIONS'

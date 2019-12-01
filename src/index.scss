@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-@import './utils';
 @import-normalize;
+@import './utils';
 
 *,
 *::before,
@@ -17,13 +17,14 @@ html {
     -moz-osx-font-smoothing: grayscale;
 
     ::-webkit-scrollbar {
-        width: 8px;
+        width: 9px;
+        height: 9px;
     }
     ::-webkit-scrollbar-track {
         background: #f4f4f4;
     }
     ::-webkit-scrollbar-thumb {
-        background: #888;
+        background: $primary;
     }
 }
 
@@ -33,7 +34,6 @@ body {
     line-height: 1.5;
     color: $text;
     overflow-y: scroll;
-    overflow-y: overlay;
 }
 
 h1 {

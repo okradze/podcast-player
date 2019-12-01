@@ -5,17 +5,17 @@ import AudioPlayer from './AudioPlayer'
 
 import {
     selectPlayingEpisode,
-    selectRecentPodcastId,
+    selectPlayingPodcastId,
     selectIsPlaying,
     selectVolume,
     selectCurrentTime,
-} from '../../redux/podcast/podcastSelectors'
+} from '../../redux/playing/playingSelectors'
 import {
     pause,
     play,
     setVolume,
     setCurrentTime,
-} from '../../redux/podcast/podcastActions'
+} from '../../redux/playing/playingActions'
 
 const AudioPlayerContainer = props => {
     if (props.episode) {
@@ -27,7 +27,7 @@ const AudioPlayerContainer = props => {
 
 const mapStateToProps = createStructuredSelector({
     episode: selectPlayingEpisode,
-    podcastId: selectRecentPodcastId,
+    podcastId: selectPlayingPodcastId,
     isPlaying: selectIsPlaying,
     volume: selectVolume,
     currentTime: selectCurrentTime,

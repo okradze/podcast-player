@@ -48,6 +48,18 @@ const AudioPlayer = ({
         }
     }, [audioSrc, play, pause, setCurrentTime])
 
+    const formatTime = time => {
+        if (time) {
+            const SECONDS_IN_HOUR = 3600
+            const date = new Date(Math.floor(time * 1000)).toISOString()
+
+            if (time < SECONDS_IN_HOUR) {
+                return date.substr(14, 5)
+            }
+            return date.substr(11, 8)
+        }
+    }
+
     return (
         <div className={styles.AudioPlayer}>
             <div className={styles.EpisodeWrapper}>
@@ -75,6 +87,8 @@ const AudioPlayer = ({
                     />
                 )}
 
+                <span className={styles.Time}>{formatTime(currentTime)}</span>
+
                 <div className={styles.Duration}>
                     <Slider
                         onChange={value => {
@@ -89,10 +103,17 @@ const AudioPlayer = ({
                     />
                 </div>
 
-                <div tabIndex='0' className={styles.VolumeWrapper}>
+                <span className={styles.Time}>
+                    -
+                    {formatTime(
+                        audio.current.duration - audio.current.currentTime,
+                    )}
+                </span>
+
+                <div tabIndex={1} className={styles.VolumeWrapper}>
                     <div className={styles.VolumeSlider}>
                         <Slider
-                            tabIndex='1'
+                            tabIndex={1}
                             onChange={value => {
                                 audio.current.volume = value
                                 setVolume(value)

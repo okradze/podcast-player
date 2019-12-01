@@ -1,38 +1,59 @@
 import {
-    PLAY_EPISODE,
-    PLAY,
-    PAUSE,
-    SET_VOLUME,
-    CURRENT_TIME,
+    START_FETCH_PODCAST,
+    START_FETCH_MORE_EPISODES,
+    START_FETCH_RECOMMENDATIONS,
+    SET_RECOMMENDATIONS,
+    SET_PODCAST,
+    SET_MORE_EPISODES,
 } from './podcastTypes'
 
 const initialState = {
-    podcastId: '',
-    playingEpisode: null,
-    isPlaying: false,
-    volume: 1.0,
-    currentTime: 0,
+    podcast: null,
+    recommendations: null,
+    isPodcastFetching: false,
+    areRecommendationsFetching: false,
+    areEpisodesFetching: false,
 }
 
 const podcastReducer = (state = initialState, action) => {
     switch (action.type) {
-        case PLAY_EPISODE:
+        case START_FETCH_PODCAST:
             return {
                 ...state,
-                currentTime: 0,
-                podcastId: action.payload.podcastId,
-                playingEpisode: action.payload.episode,
+                isPodcastFetching: true,
             }
-        case PLAY:
-            return { ...state, isPlaying: true }
-        case PAUSE:
-            return { ...state, isPlaying: false }
-        case CURRENT_TIME:
-            return { ...state, currentTime: action.payload }
-        case SET_VOLUME:
+
+        case START_FETCH_RECOMMENDATIONS:
+            return { ...state, areRecommendationsFetching: true }
+
+        case START_FETCH_MORE_EPISODES:
+            return { ...state, areEpisodesFetching: true }
+
+        case SET_PODCAST:
             return {
                 ...state,
-                volume: action.payload,
+                isPodcastFetching: false,
+                podcast: action.payload,
+            }
+
+        case SET_MORE_EPISODES:
+            return {
+                ...state,
+                areEpisodesFetching: false,
+                podcast: {
+                    ...action.payload,
+                    episodes: [
+                        ...state.podcast.episodes,
+                        ...action.payload.episodes,
+                    ],
+                },
+            }
+
+        case SET_RECOMMENDATIONS:
+            return {
+                ...state,
+                areRecommendationsFetching: false,
+                recommendations: action.payload,
             }
         default:
             return state

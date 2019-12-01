@@ -1,94 +1,93 @@
-import React, { useState, useEffect } from 'react'
-import { listenNotesApi } from '../../axios'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
+import {
+    fetchPodcast,
+    fetchRecommendations,
+    fetchMoreEpisodes,
+} from '../../redux/podcast/podcastActions'
+import {
+    selectPodcast,
+    selectRecommendations,
+    selectIsPodcastFetching,
+    selectAreRecommendationsFetching,
+} from '../../redux/podcast/podcastSelectors'
 import PodcastList from '../../components/PodcastList/PodcastList'
 import EpisodeList from '../../components/EpisodeList/EpisodeList'
 import Spinner from '../../components/Spinner/Spinner'
 import styles from './Podcastpage.module.scss'
 
-const Podcastpage = ({ match }) => {
-    const [podcast, setPodcast] = useState()
-    const [recommendations, setRecommendations] = useState()
-    const [paginationInfo, setPaginationInfo] = useState('')
-
+const Podcastpage = ({
+    match,
+    podcast,
+    recommendations,
+    isPodcastFetching,
+    areRecommendationsFetching,
+    fetchPodcast,
+    fetchRecommendations,
+}) => {
     const { podcastId } = match.params
 
     useEffect(() => {
-        return () => {
-            setPaginationInfo('')
-            setPodcast()
-            setRecommendations()
-        }
-    }, [podcastId])
+        fetchPodcast(podcastId)
+    }, [fetchPodcast, podcastId])
 
     useEffect(() => {
-        const fetchPodcast = async () => {
-            const { data } = await listenNotesApi.get(
-                `/podcasts/${podcastId}?next_episode_pub_date=${paginationInfo}`,
-            )
-            setPodcast((prevState = { episodes: [] }) => ({
-                ...data,
-                episodes: [...prevState.episodes, ...data.episodes],
-            }))
-        }
-        fetchPodcast()
-    }, [podcastId, paginationInfo])
+        fetchRecommendations(podcastId)
+    }, [fetchRecommendations, podcastId])
 
-    useEffect(() => {
-        const fetchRecommendations = async () => {
-            const { data } = await listenNotesApi.get(
-                `/podcasts/${podcastId}/recommendations`,
-            )
-            setRecommendations(data.recommendations)
-        }
-        fetchRecommendations()
-    }, [podcastId])
+    const { thumbnail, publisher, description, title } = podcast || {}
 
-    const loadMoreEpisodes = () => {
-        const nextEpisodePubDate = podcast.next_episode_pub_date
-        if (nextEpisodePubDate) {
-            setPaginationInfo(nextEpisodePubDate)
-        }
-    }
+    return (
+        <div>
+            {isPodcastFetching && <Spinner />}
+            {!isPodcastFetching && podcast && (
+                <div>
+                    <h2 className={styles.Title}>{title}</h2>
+                    <div className={styles.Content}>
+                        <div className={styles.ThumbnailWrapper}>
+                            <img
+                                className={styles.Thumbnail}
+                                src={thumbnail}
+                                alt=''
+                            />
+                        </div>
+                        <div>
+                            <h3 className={styles.Publisher}>{publisher}</h3>
+                            <p className={styles.Text}>{description}</p>
+                        </div>
+                    </div>
 
-    if (podcast) {
-        const { thumbnail, publisher, description, title, episodes } = podcast
+                    <div className={styles.EpisodeList}>
+                        <EpisodeList />
+                    </div>
 
-        return (
-            <div>
-                <h2 className={styles.Title}>{title}</h2>
-                <div className={styles.Content}>
-                    <div className={styles.ThumbnailWrapper}>
-                        <img
-                            className={styles.Thumbnail}
-                            src={thumbnail}
-                            alt=''
+                    {areRecommendationsFetching && <Spinner />}
+                    {recommendations && (
+                        <PodcastList
+                            podcasts={recommendations}
+                            title='Recommendations'
                         />
-                    </div>
-                    <div>
-                        <h3 className={styles.Publisher}>{publisher}</h3>
-                        <p className={styles.Text}>{description}</p>
-                    </div>
+                    )}
                 </div>
-
-                <div className={styles.EpisodeList}>
-                    <EpisodeList
-                        loadMoreEpisodes={loadMoreEpisodes}
-                        episodes={episodes}
-                    />
-                </div>
-
-                {recommendations && (
-                    <PodcastList
-                        podcasts={recommendations}
-                        title='Recommendations'
-                    />
-                )}
-            </div>
-        )
-    } else {
-        return <Spinner />
-    }
+            )}
+        </div>
+    )
 }
 
-export default Podcastpage
+const mapStateToProps = createStructuredSelector({
+    podcast: selectPodcast,
+    recommendations: selectRecommendations,
+    isPodcastFetching: selectIsPodcastFetching,
+    areRecommendationsFetching: selectAreRecommendationsFetching,
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchPodcast: podcastId => dispatch(fetchPodcast(podcastId)),
+    fetchRecommendations: podcastId =>
+        dispatch(fetchRecommendations(podcastId)),
+    fetchMoreEpisodes: () => dispatch(fetchMoreEpisodes()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Podcastpage)

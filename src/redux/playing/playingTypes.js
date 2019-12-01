@@ -1,0 +1,6 @@
+export const PLAY_EPISODE = 'playing/PLAY_EPISODE'
+export const TOGGLE_PLAY = 'playing/TOGGLE_PLAY'
+export const SET_VOLUME = 'playing/SET_VOLUME'
+export const PLAY = 'playing/PLAY'
+export const PAUSE = 'playing/PAUSE'
+export const CURRENT_TIME = 'playing/CURRENT_TIME'

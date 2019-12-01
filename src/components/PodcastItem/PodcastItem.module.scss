@@ -56,7 +56,8 @@
     font-weight: 600;
     transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 
-    &:focus {
+    &:focus,
+    &:hover {
         outline: 0;
         color: $offset;
         background-color: $primary;
