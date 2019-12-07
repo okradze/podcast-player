@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { Helmet } from 'react-helmet'
 
 import {
     fetchPodcastLists,
@@ -34,6 +35,9 @@ const Discoverpage = ({
 
     return (
         <div>
+            <Helmet>
+                <title>Discover Podcasts | Podcast Player</title>
+            </Helmet>
             {lists &&
                 lists.map(({ id, title, podcasts }) => (
                     <PodcastList key={id} title={title} podcasts={podcasts} />

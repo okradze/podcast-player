@@ -3,6 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import EllipsisText from '../EllipsisText/EllipsisText'
 import { playEpisode } from '../../redux/playing/playingActions'
 import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import styles from './EpisodeItem.module.scss'
@@ -17,7 +18,9 @@ const EpisodeItem = ({ match, playEpisode, episode }) => {
             </div>
             <div className={styles.Content}>
                 <div>
-                    <h4 className={styles.Title}>{title}</h4>
+                    <EllipsisText tagName='h4' className={styles.Title}>
+                        {title}
+                    </EllipsisText>
                     <span className={styles.Duration}>
                         {new Date(audio_length_sec * 1000)
                             .toISOString()

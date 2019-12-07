@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { Helmet } from 'react-helmet'
 
 import {
     fetchPodcast,
@@ -41,6 +42,13 @@ const Podcastpage = ({
 
     return (
         <div>
+            <Helmet>
+                <title>
+                    {podcast
+                        ? `${podcast.title} | Podcast Player`
+                        : 'Loading... | Podcast Player'}
+                </title>
+            </Helmet>
             {isPodcastFetching && <Spinner />}
             {!isPodcastFetching && podcast && (
                 <div>

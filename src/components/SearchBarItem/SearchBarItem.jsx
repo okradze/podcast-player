@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import EllipsisText from '../EllipsisText/EllipsisText'
 import styles from './SearchBarItem.module.scss'
 
 const SearchBarItem = ({
@@ -17,8 +18,12 @@ const SearchBarItem = ({
         >
             <img className={styles.Image} src={thumbnail} alt='' />
             <div>
-                <h4 className={styles.Title}>{title_original}</h4>
-                <p className={styles.Publisher}>{publisher_original}</p>
+                <EllipsisText tagName='h4' className={styles.Title}>
+                    {title_original}
+                </EllipsisText>
+                <EllipsisText tagName='p' className={styles.Publisher}>
+                    {publisher_original}
+                </EllipsisText>
             </div>
         </Link>
     </li>

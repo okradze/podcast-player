@@ -2,10 +2,6 @@
 
 .Item {
     list-style: none;
-
-    &:hover {
-        background-color: $bg;
-    }
 }
 
 .Link {
@@ -20,7 +16,7 @@
     &:focus,
     &:hover {
         outline: 0;
-        background-color: $bg-2;
+        background-color: $bg;
     }
 }
 
@@ -29,16 +25,6 @@
     height: 4rem;
     margin-right: 1.5rem;
     flex-shrink: 0;
-}
-
-.Title,
-.Publisher {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    white-space: normal;
-    overflow: hidden;
 }
 
 .Title {

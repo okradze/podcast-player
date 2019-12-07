@@ -55,9 +55,12 @@
     align-content: center;
     grid-template-columns: min-content 1fr min-content;
     grid-column-gap: 3rem;
+    grid-template-areas: 'play track volume';
 
     @media only screen and (max-width: 576px) {
         grid-template-rows: repeat(2, min-content);
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'volume play' 'track track';
     }
 }
 
@@ -65,6 +68,7 @@
     display: grid;
     grid-template-columns: min-content 1fr min-content;
     grid-gap: 2rem;
+    grid-area: track;
 }
 
 .Duration {
@@ -75,6 +79,7 @@
 
 .Play,
 .Pause {
+    grid-area: play;
     width: 3rem;
     height: 3rem;
     cursor: pointer;
@@ -92,6 +97,8 @@
     position: relative;
     display: flex;
     align-items: center;
+    grid-area: volume;
+    justify-self: end;
 
     &:hover .VolumeSlider,
     &:focus .VolumeSlider {

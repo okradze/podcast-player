@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { Helmet } from 'react-helmet'
 
 import { fetchPodcasts, nextPage } from '../../redux/podcasts/podcastsActions'
 import {
@@ -31,6 +32,9 @@ const Homepage = ({
 
     return (
         <div>
+            <Helmet>
+                <title>Home | Podcast Player</title>
+            </Helmet>
             {podcasts && (
                 <PodcastList
                     needsLoadMoreButton

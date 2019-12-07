@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Slider from 'rc-slider/lib/Slider'
 
+import EllipsisText from '../EllipsisText/EllipsisText'
 import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import { ReactComponent as PauseButton } from '../../assets/pause-button.svg'
 import { ReactComponent as VolumeIcon } from '../../assets/volume.svg'
@@ -39,12 +40,25 @@ const AudioPlayer = ({
             },
         )
 
+        const windowEvent = window.addEventListener('keydown', e => {
+            if (e.code === 'Space') {
+                audio.current.paused
+                    ? audio.current.play()
+                    : audio.current.pause()
+            } else if (e.code === 'ArrowLeft') {
+                audio.current.currentTime -= 10
+            } else if (e.code === 'ArrowRight') {
+                audio.current.currentTime += 10
+            }
+        })
+
         audio.current.play()
 
         return () => {
             audio.current.removeEventListener('pause', pauseEvent)
             audio.current.removeEventListener('play', playEvent)
             audio.current.removeEventListener('timeupdate', timeUpdateEvent)
+            window.removeEventListener('keydown', windowEvent)
         }
     }, [audioSrc, play, pause, setCurrentTime])
 
@@ -68,7 +82,7 @@ const AudioPlayer = ({
                 </div>
 
                 <Link className={styles.Title} to={`/podcast/${podcastId}`}>
-                    {title}
+                    <EllipsisText>{title}</EllipsisText>
                 </Link>
             </div>
 

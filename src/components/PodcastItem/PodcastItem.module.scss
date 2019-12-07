@@ -17,24 +17,16 @@
     border-radius: 3rem;
     overflow: hidden;
     margin-right: 3rem;
-    position: relative;
     flex-shrink: 0;
+    align-self: center;
 
     @media only screen and (max-width: 576px) {
         width: 12rem;
         height: 12rem;
     }
-
-    @media only screen and (max-width: 320px) {
-        width: 10rem;
-        height: 10rem;
-    }
 }
 
 .Image {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
 }
 
@@ -42,16 +34,6 @@
     @media only screen and (max-width: 340px) {
         font-size: 1.5rem;
     }
-}
-
-.Title,
-.Publisher {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-    white-space: normal;
-    overflow: hidden;
 }
 
 .Publisher {
