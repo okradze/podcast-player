@@ -8,11 +8,11 @@ import {
 } from './podcastTypes'
 import { listenNotesApi } from '../../axios'
 
-const startFetchPodcast = () => ({
+export const startFetchPodcast = () => ({
     type: START_FETCH_PODCAST,
 })
 
-const setPodcast = podcast => ({
+export const setPodcast = podcast => ({
     type: SET_PODCAST,
     payload: podcast,
 })
@@ -27,11 +27,11 @@ export const fetchPodcast = podcastId => {
     }
 }
 
-const startFetchRecommendations = () => ({
+export const startFetchRecommendations = () => ({
     type: START_FETCH_RECOMMENDATIONS,
 })
 
-const setRecommendations = recommendations => ({
+export const setRecommendations = recommendations => ({
     type: SET_RECOMMENDATIONS,
     payload: recommendations,
 })
@@ -46,11 +46,11 @@ export const fetchRecommendations = podcastId => {
     }
 }
 
-const startFetchMoreEpisodes = () => ({
+export const startFetchMoreEpisodes = () => ({
     type: START_FETCH_MORE_EPISODES,
 })
 
-const setMoreEpisodes = podcast => ({
+export const setMoreEpisodes = podcast => ({
     type: SET_MORE_EPISODES,
     payload: podcast,
 })

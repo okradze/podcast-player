@@ -1,7 +1,7 @@
 import { listenNotesApi } from '../../axios'
 import { ADD_PODCASTS, NEXT_PAGE, START_FETCH_PODCASTS } from './podcastsTypes'
 
-const addPodcasts = podcasts => ({
+export const addPodcasts = podcasts => ({
     type: ADD_PODCASTS,
     payload: podcasts,
 })

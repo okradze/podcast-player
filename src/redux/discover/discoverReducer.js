@@ -7,7 +7,7 @@ const initialState = {
     lastFetchedPage: null,
 }
 
-const podcastsReducer = (state = initialState, action) => {
+const discoverReducer = (state = initialState, action) => {
     switch (action.type) {
         case START_FETCH_LISTS:
             return {
@@ -34,4 +34,4 @@ const podcastsReducer = (state = initialState, action) => {
     }
 }
 
-export default podcastsReducer
+export default discoverReducer

@@ -9,7 +9,7 @@ import { ReactComponent as SearchIcon } from '../../assets/search.svg'
 import { ReactComponent as PodcastIcon } from '../../assets/podcast.svg'
 import styles from './Sidebar.module.scss'
 
-const Sidebar = ({ playingPodcastId }) => {
+export const Sidebar = ({ playingPodcastId }) => {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false)
 
     return (
@@ -36,6 +36,7 @@ const Sidebar = ({ playingPodcastId }) => {
                         Podcast
                     </Link>
                 </h1>
+
                 <nav className={styles.Nav}>
                     <h4 className={styles.Title}>PODCAST</h4>
                     <ul>
@@ -50,6 +51,7 @@ const Sidebar = ({ playingPodcastId }) => {
                                 Home
                             </NavLink>
                         </li>
+
                         <li className={styles.ListItem}>
                             <NavLink
                                 to='/discover'
@@ -60,6 +62,7 @@ const Sidebar = ({ playingPodcastId }) => {
                                 Discover
                             </NavLink>
                         </li>
+
                         <li className={styles.ListItem}>
                             <NavLink
                                 to={`/podcast/${playingPodcastId}`}

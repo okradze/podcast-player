@@ -1,11 +1,11 @@
 import { listenNotesApi } from '../../axios'
 import { START_FETCH_LISTS, ADD_LISTS, NEXT_PAGE } from './discoverTypes'
 
-const startFetchLists = () => ({
+export const startFetchLists = () => ({
     type: START_FETCH_LISTS,
 })
 
-const addLists = lists => ({
+export const addLists = lists => ({
     type: ADD_LISTS,
     payload: lists,
 })
