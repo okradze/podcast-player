@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render default version 1`] = `
+<button
+  className="Button "
+  type="button"
+>
+  Hello
+</button>
+`;
+
+exports[`Button should render inverted version 1`] = `
+<button
+  className="Button Inverted"
+  type="button"
+>
+  Hello
+</button>
+`;
+
+exports[`should render Button component 1`] = `
+<button
+  className="Button "
+  type="button"
+>
+  Hello
+</button>
+`;

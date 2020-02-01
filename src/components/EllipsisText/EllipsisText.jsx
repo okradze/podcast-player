@@ -1,7 +1,11 @@
 import React from 'react'
 import styles from './EllipsisText.module.scss'
 
-const EllipsisText = ({ tagName = 'span', children, className = '' }) => {
+export const EllipsisText = ({
+    tagName = 'span',
+    children,
+    className = '',
+}) => {
     return React.createElement(
         tagName,
         { className: `${styles.Ellipsis} ${className}` },

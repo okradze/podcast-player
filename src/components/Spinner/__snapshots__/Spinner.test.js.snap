@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Spinner component 1`] = `
+<div
+  className="SpinnerWrapper"
+>
+  <span
+    className="Spinner"
+  >
+    <span
+      className="SpinItem"
+    />
+    <span
+      className="SpinItem"
+    />
+    <span
+      className="SpinItem"
+    />
+    <span
+      className="SpinItem"
+    />
+  </span>
+</div>
+`;

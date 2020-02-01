@@ -1,19 +1,12 @@
 import React from 'react'
-import { render, cleanup, fireEvent } from '@testing-library/react'
+import { shallow } from 'enzyme'
 import { Button } from './Button'
 
-afterEach(cleanup)
-
 describe('Button', () => {
-    it('renders with text', () => {
-        const text = 'Hello'
-        const { container } = render(<Button>{text}</Button>)
-        expect(container.firstChild).toHaveTextContent(text)
+    it('should render default version', () => {
+        expect(shallow(<Button>Hello</Button>)).toMatchSnapshot()
     })
-    it('can handle clicks', () => {
-        const clickFn = jest.fn()
-        const { container } = render(<Button onClick={clickFn}></Button>)
-        fireEvent.click(container.firstChild)
-        expect(clickFn).toHaveBeenCalled()
+    it('should render inverted version', () => {
+        expect(shallow(<Button inverted>Hello</Button>)).toMatchSnapshot()
     })
 })
