@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom'
 import EllipsisText from '../EllipsisText/EllipsisText'
 import styles from './PodcastItem.module.scss'
 
-const PodcastItem = ({ id, isInSlider, thumbnail, title, publisher }) => (
-    <div
-        className={`${styles.Item} ${isInSlider ? styles.Slider : ''}`}
-        key={id}
-    >
+export const PodcastItem = ({ id, thumbnail, title, publisher }) => (
+    <div className={styles.Item} key={id}>
         <div className={styles.ImageWrapper}>
             <img className={styles.Image} src={thumbnail} alt='' />
         </div>
@@ -18,11 +15,10 @@ const PodcastItem = ({ id, isInSlider, thumbnail, title, publisher }) => (
             <EllipsisText tagName='h4' className={styles.Title}>
                 {title}
             </EllipsisText>
-            {!isInSlider && (
-                <Link to={`/podcast/${id}`} className={styles.Button}>
-                    View More
-                </Link>
-            )}
+
+            <Link to={`/podcast/${id}`} className={styles.Button}>
+                View More
+            </Link>
         </div>
     </div>
 )

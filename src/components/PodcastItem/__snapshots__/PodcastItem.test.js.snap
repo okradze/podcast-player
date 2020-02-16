@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PodcastItem should render 1`] = `
+<div
+  className="Item"
+  key="1"
+>
+  <div
+    className="ImageWrapper"
+  >
+    <img
+      alt=""
+      className="Image"
+      src="http://www.example.com/link"
+    />
+  </div>
+  <div
+    className="Content"
+  >
+    <EllipsisText
+      className="Publisher"
+      tagName="p"
+    >
+      John Doe
+    </EllipsisText>
+    <EllipsisText
+      className="Title"
+      tagName="h4"
+    >
+      Podcast
+    </EllipsisText>
+    <Link
+      className="Button"
+      to="/podcast/1"
+    >
+      View More
+    </Link>
+  </div>
+</div>
+`;

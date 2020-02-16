@@ -61,20 +61,3 @@
         background-color: $primary;
     }
 }
-
-.Slider {
-    flex-direction: column;
-
-    .Image {
-        margin-right: 0;
-        margin-bottom: 1rem;
-    }
-
-    .Publisher {
-        font-size: 1.3rem;
-    }
-
-    .Title {
-        font-size: 1.5rem;
-    }
-}

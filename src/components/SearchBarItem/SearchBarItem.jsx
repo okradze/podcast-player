@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import EllipsisText from '../EllipsisText/EllipsisText'
 import styles from './SearchBarItem.module.scss'
 
-const SearchBarItem = ({
+export const SearchBarItem = ({
     id,
     thumbnail,
     publisher_original,

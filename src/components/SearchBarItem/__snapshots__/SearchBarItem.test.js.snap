@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBarItem should render when there is no search term 1`] = `
+<li
+  className="Item"
+  key="1"
+>
+  <Link
+    className="Link"
+    onClick={[Function]}
+    to="/podcast/1"
+  >
+    <img
+      alt=""
+      className="Image"
+      src="http://www.example.com/link"
+    />
+    <div>
+      <EllipsisText
+        className="Title"
+        tagName="h4"
+      >
+        Podcast
+      </EllipsisText>
+      <EllipsisText
+        className="Publisher"
+        tagName="p"
+      >
+        John Doe
+      </EllipsisText>
+    </div>
+  </Link>
+</li>
+`;

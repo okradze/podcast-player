@@ -5,7 +5,7 @@ import SearchBarItem from '../SearchBarItem/SearchBarItem'
 import Spinner from '../Spinner/Spinner'
 import styles from './SearchBar.module.scss'
 
-const SearchBar = () => {
+export const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [searchResults, setSearchResults] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
