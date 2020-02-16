@@ -22,9 +22,6 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
     "browserslist": {
         "production": [
             ">0.2%",
@@ -41,6 +38,9 @@
         "axios-mock-adapter": "^1.17.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
+        "eslint-config-airbnb": "^18.0.1",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
         "jest-enzyme": "^7.1.2",
         "node-sass": "^4.13.0",
         "redux-mock-store": "^1.5.4"

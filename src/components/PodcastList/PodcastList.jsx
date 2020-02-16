@@ -6,7 +6,7 @@ import styles from './PodcastList.module.scss'
 const PodcastList = ({ podcasts, title }) => (
     <div className={styles.Wrapper}>
         <h2 className={`${styles.Title} ${title && styles.SmallTitle}`}>
-            {title ? title : 'Popular Podcasts'}
+            {title || 'Popular Podcasts'}
         </h2>
         <div className={styles.PodcastList}>
             {podcasts.map(podcast => (

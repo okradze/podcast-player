@@ -15,6 +15,8 @@ export const Sidebar = ({ playingPodcastId }) => {
     return (
         <>
             <span
+                tabIndex={0}
+                role='button'
                 aria-label='Toggle menu'
                 onClick={() => setIsSidebarVisible(!isSidebarVisible)}
                 className={styles.Toggle}
@@ -22,14 +24,14 @@ export const Sidebar = ({ playingPodcastId }) => {
                 <span
                     className={`${styles.ToggleIcon} ${
                         isSidebarVisible ? styles.ToggleIconWhenVisible : ''
-                    }`}
-                ></span>
+                        }`}
+                />
             </span>
 
             <div
                 className={`${styles.Sidebar} ${
                     isSidebarVisible ? styles.SidebarMobileVisible : ''
-                }`}
+                    }`}
             >
                 <h1 className={styles.Logo}>
                     <Link to='/' className={styles.LogoLink}>

@@ -19,22 +19,21 @@ const EpisodeList = ({
     fetchMoreEpisodes,
     areMoreEpisodes,
 }) => (
-    <div>
-        {episodes && (
-            <div className={styles.List}>
-                {episodes.map(episode => (
-                    <EpisodeItem key={episode.id} episode={episode} />
-                ))}
-            </div>
-        )}
+        <div>
+            {episodes && (
+                <div className={styles.List}>
+                    {episodes.map(episode => (
+                        <EpisodeItem key={episode.id} episode={episode} />
+                    ))}
+                </div>
+            )}
 
-        {areEpisodesFetching ? (
-            <Spinner />
-        ) : areMoreEpisodes ? (
-            <Button onClick={() => fetchMoreEpisodes()}>Load More</Button>
-        ) : null}
-    </div>
-)
+            {areEpisodesFetching &&
+                <Spinner />}
+            {!areEpisodesFetching && areMoreEpisodes &&
+                <Button onClick={() => fetchMoreEpisodes()}>Load More</Button>}
+        </div>
+    )
 
 const mapStateToProps = createStructuredSelector({
     episodes: selectEpisodes,
