@@ -6,6 +6,8 @@ exports[`Sidebar should render component 1`] = `
     aria-label="Toggle menu"
     className="Toggle"
     onClick={[Function]}
+    role="button"
+    tabIndex={0}
   >
     <span
       className="ToggleIcon "
@@ -88,6 +90,8 @@ exports[`Sidebar should render component when playing podcast 1`] = `
     aria-label="Toggle menu"
     className="Toggle"
     onClick={[Function]}
+    role="button"
+    tabIndex={0}
   >
     <span
       className="ToggleIcon "
@@ -170,6 +174,8 @@ exports[`Sidebar should render component when sidebar is visible 1`] = `
     aria-label="Toggle menu"
     className="Toggle"
     onClick={[Function]}
+    role="button"
+    tabIndex={0}
   >
     <span
       className="ToggleIcon ToggleIconWhenVisible"
