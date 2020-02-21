@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Slider from 'rc-slider/lib/Slider'
 
@@ -20,6 +20,7 @@ const AudioPlayer = ({
     setVolume,
     setCurrentTime,
 }) => {
+    const [isMinimized, setIsMinimized] = useState(true)
     const { thumbnail, title, audio: audioSrc, audio_length_sec } = episode
     const audio = useRef(new Audio())
 
@@ -77,7 +78,11 @@ const AudioPlayer = ({
     return (
         <div className={styles.AudioPlayer}>
             <div className={styles.MinimizeWrapper}>
-                <span tabIndex={0} role='button' className={styles.Minimize} />
+                <span
+                    onClick={() => setIsMinimized(!isMinimized)}
+                    tabIndex={0}
+                    role='button'
+                    className={styles.Minimize} />
             </div>
 
             <div className={styles.EpisodeWrapper}>
