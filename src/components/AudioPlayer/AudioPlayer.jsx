@@ -76,6 +76,10 @@ const AudioPlayer = ({
 
     return (
         <div className={styles.AudioPlayer}>
+            <div className={styles.MinimizeWrapper}>
+                <span tabIndex={0} role='button' className={styles.Minimize} />
+            </div>
+
             <div className={styles.EpisodeWrapper}>
                 <div className={styles.ThumbnailWrapper}>
                     <img className={styles.Thumbnail} src={thumbnail} alt='' />
