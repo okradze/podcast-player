@@ -76,7 +76,7 @@ const AudioPlayer = ({
     }
 
     return (
-        <div className={styles.AudioPlayer}>
+        <div className={`${styles.AudioPlayer} ${isMinimized ? styles.AudioPlayerMinimized : ''}`}>
             <div className={styles.MinimizeWrapper}>
                 <span
                     onClick={() => setIsMinimized(!isMinimized)}
@@ -110,51 +110,56 @@ const AudioPlayer = ({
                         />
                     )}
 
-                <div className={styles.DurationWrapper}>
-                    <span className={styles.Time}>
-                        {formatTime(currentTime)}
-                    </span>
+                {!isMinimized && (
+                    <>
+                        <div className={styles.DurationWrapper}>
+                            <span className={styles.Time}>
+                                {formatTime(currentTime)}
+                            </span>
 
-                    <div className={styles.Duration}>
-                        <Slider
-                            onChange={value => {
-                                setCurrentTime(value)
-                                audio.current.currentTime = value
-                            }}
-                            value={currentTime}
-                            step={1}
-                            min={0}
-                            max={audio_length_sec}
-                            className={styles.Slider}
-                        />
-                    </div>
+                            <div className={styles.Duration}>
+                                <Slider
+                                    onChange={value => {
+                                        setCurrentTime(value)
+                                        audio.current.currentTime = value
+                                    }}
+                                    value={currentTime}
+                                    step={1}
+                                    min={0}
+                                    max={audio_length_sec}
+                                    className={styles.Slider}
+                                />
+                            </div>
 
-                    <span className={styles.Time}>
-                        -
+                            <span className={styles.Time}>
+                                -
                         {formatTime(
-                            audio.current.duration - audio.current.currentTime,
-                        )}
-                    </span>
-                </div>
+                                    audio.current.duration - audio.current.currentTime,
+                                )}
+                            </span>
+                        </div>
 
-                <div tabIndex={0} className={styles.VolumeWrapper}>
-                    <div className={styles.VolumeSlider}>
-                        <Slider
-                            tabIndex={0}
-                            onChange={value => {
-                                audio.current.volume = value
-                                setVolume(value)
-                            }}
-                            value={volume}
-                            step={0.01}
-                            min={0.0}
-                            max={1.0}
-                            vertical
-                            className={styles.Slider}
-                        />
-                    </div>
-                    <VolumeIcon className={styles.VolumeIcon} />
-                </div>
+                        <div tabIndex={0} className={styles.VolumeWrapper}>
+                            <div className={styles.VolumeSlider}>
+                                <Slider
+                                    tabIndex={0}
+                                    onChange={value => {
+                                        audio.current.volume = value
+                                        setVolume(value)
+                                    }}
+                                    value={volume}
+                                    step={0.01}
+                                    min={0.0}
+                                    max={1.0}
+                                    vertical
+                                    className={styles.Slider}
+                                />
+                            </div>
+                            <VolumeIcon className={styles.VolumeIcon} />
+                        </div>
+
+                    </>
+                )}
             </div>
         </div>
     )

@@ -12,11 +12,32 @@
     box-shadow: 0px -2px 4px 0px rgba($text, 0.15);
 }
 
+.AudioPlayerMinimized {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr min-content;
+    grid-template-areas: 'minimize minimize' 'episode play';
+
+    .MinimizeWrapper {
+        grid-area: minimize;
+    }
+    .EpisodeWrapper {
+        grid-area: episode;
+        margin-right: 1rem;
+    }
+    .Play,.Pause {
+        grid-area: play;
+    }
+    .ControllsWrapper {
+        margin-top: 0;
+        display: inline-block;
+    }
+}
+
 .EpisodeWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
 }
 
 .ThumbnailWrapper {
@@ -50,6 +71,7 @@
 }
 
 .ControllsWrapper {
+    margin-top: 1rem;
     display: grid;
     align-content: center;
     grid-template-columns: min-content 1fr min-content;
