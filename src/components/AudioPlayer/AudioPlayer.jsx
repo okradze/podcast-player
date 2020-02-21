@@ -42,6 +42,9 @@ const AudioPlayer = ({
         )
 
         const windowEvent = window.addEventListener('keydown', e => {
+            if (e.code === 'Space' && e.target === document.body) {
+                e.preventDefault()
+            }
             if (e.code === 'Space') {
                 audio.current.paused
                     ? audio.current.play()
