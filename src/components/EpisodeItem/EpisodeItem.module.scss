@@ -8,10 +8,6 @@
     border-radius: 5px;
     background-color: $bg;
     transition: transform 0.25s ease-in-out;
-
-    &:hover {
-        transform: scale(1.018);
-    }
 }
 
 .Content {
