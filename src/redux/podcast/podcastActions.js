@@ -1,70 +1,58 @@
-import {
-    START_FETCH_PODCAST,
-    START_FETCH_MORE_EPISODES,
-    START_FETCH_RECOMMENDATIONS,
-    SET_RECOMMENDATIONS,
-    SET_PODCAST,
-    SET_MORE_EPISODES,
-} from './podcastTypes'
-import { listenNotesApi } from '../../axios'
+import PodcastTypes from './podcastTypes'
 
-export const startFetchPodcast = () => ({
-    type: START_FETCH_PODCAST,
+export const fetchPodcast = podcastId => ({
+    type: PodcastTypes.FETCH_PODCAST,
+    payload: podcastId,
 })
 
-export const setPodcast = podcast => ({
-    type: SET_PODCAST,
+export const fetchPodcastStart = () => ({
+    type: PodcastTypes.FETCH_PODCAST_START,
+})
+
+export const fetchPodcastSuccess = podcast => ({
+    type: PodcastTypes.FETCH_PODCAST_SUCCESS,
     payload: podcast,
 })
 
-export const fetchPodcast = podcastId => {
-    return async dispatch => {
-        dispatch(startFetchPodcast())
-
-        const { data } = await listenNotesApi.get(`/podcasts/${podcastId}`)
-
-        dispatch(setPodcast(data))
-    }
-}
-
-export const startFetchRecommendations = () => ({
-    type: START_FETCH_RECOMMENDATIONS,
+export const fetchPodcastFailure = error => ({
+    type: PodcastTypes.FETCH_PODCAST_FAILURE,
+    payload: error,
 })
 
-export const setRecommendations = recommendations => ({
-    type: SET_RECOMMENDATIONS,
+export const fetchRecommendations = podcastId => ({
+    type: PodcastTypes.FETCH_RECOMMENDATIONS,
+    payload: podcastId,
+})
+
+export const fetchRecommendationsStart = () => ({
+    type: PodcastTypes.FETCH_RECOMMENDATIONS_START,
+})
+
+export const fetchRecommendationsSuccess = recommendations => ({
+    type: PodcastTypes.FETCH_RECOMMENDATIONS_SUCCESS,
     payload: recommendations,
 })
 
-export const fetchRecommendations = podcastId => {
-    return async dispatch => {
-        dispatch(startFetchRecommendations())
-        const { data } = await listenNotesApi.get(
-            `/podcasts/${podcastId}/recommendations`,
-        )
-        dispatch(setRecommendations(data.recommendations))
-    }
-}
-
-export const startFetchMoreEpisodes = () => ({
-    type: START_FETCH_MORE_EPISODES,
+export const fetchRecommendationsFailure = error => ({
+    type: PodcastTypes.FETCH_RECOMMENDATIONS_FAILURE,
+    payload: error,
 })
 
-export const setMoreEpisodes = podcast => ({
-    type: SET_MORE_EPISODES,
-    payload: podcast,
+export const fetchMoreEpisodes = podcastId => ({
+    type: PodcastTypes.FETCH_MORE_EPISODES,
+    payload: podcastId,
 })
 
-export const fetchMoreEpisodes = () => {
-    return async (dispatch, getState) => {
-        const podcastId = getState().podcast.podcast.id
-        const paginationInfo = getState().podcast.podcast.next_episode_pub_date
-        dispatch(startFetchMoreEpisodes())
+export const fetchMoreEpisodesStart = () => ({
+    type: PodcastTypes.FETCH_MORE_EPISODES_START,
+})
 
-        const { data } = await listenNotesApi.get(
-            `/podcasts/${podcastId}?next_episode_pub_date=${paginationInfo}`,
-        )
+export const fetchMoreEpisodesSuccess = episodes => ({
+    type: PodcastTypes.FETCH_MORE_EPISODES_SUCCESS,
+    payload: episodes,
+})
 
-        dispatch(setMoreEpisodes(data))
-    }
-}
+export const fetchMoreEpisodesFailure = error => ({
+    type: PodcastTypes.FETCH_MORE_EPISODES_FAILURE,
+    payload: error,
+})

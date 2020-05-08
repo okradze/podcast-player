@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet'
 import {
     fetchPodcast,
     fetchRecommendations,
-    fetchMoreEpisodes,
 } from '../../redux/podcast/podcastActions'
 import {
     selectPodcast,
@@ -14,6 +13,7 @@ import {
     selectIsPodcastFetching,
     selectAreRecommendationsFetching,
 } from '../../redux/podcast/podcastSelectors'
+
 import PodcastList from '../../components/PodcastList/PodcastList'
 import EpisodeList from '../../components/EpisodeList/EpisodeList'
 import Spinner from '../../components/Spinner/Spinner'
@@ -95,7 +95,6 @@ const mapDispatchToProps = dispatch => ({
     fetchPodcast: podcastId => dispatch(fetchPodcast(podcastId)),
     fetchRecommendations: podcastId =>
         dispatch(fetchRecommendations(podcastId)),
-    fetchMoreEpisodes: () => dispatch(fetchMoreEpisodes()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Podcastpage)

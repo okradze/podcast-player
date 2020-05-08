@@ -5,6 +5,7 @@ const initialState = {
     isFetching: false,
     page: 1,
     lastFetchedPage: null,
+    error: null,
 }
 
 const discoverReducer = (state = initialState, action) => {

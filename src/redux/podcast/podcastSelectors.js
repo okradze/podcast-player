@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const podcast = state => state.podcast
+export const podcast = state => state.podcast
 
 export const selectPodcast = createSelector(
     [podcast],
