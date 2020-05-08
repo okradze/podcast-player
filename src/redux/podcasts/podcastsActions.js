@@ -1,31 +1,23 @@
-import { listenNotesApi } from '../../axios'
-import { ADD_PODCASTS, NEXT_PAGE, START_FETCH_PODCASTS } from './podcastsTypes'
+import PodcastsTypes from './podcastsTypes'
 
-export const addPodcasts = podcasts => ({
-    type: ADD_PODCASTS,
+export const nextPage = () => ({
+    type: PodcastsTypes.NEXT_PAGE,
+})
+
+export const fetchPodcasts = () => ({
+    type: PodcastsTypes.FETCH_PODCASTS,
+})
+
+export const fetchPodcastsStart = () => ({
+    type: PodcastsTypes.FETCH_PODCASTS_START,
+})
+
+export const fetchPodcastsSuccess = podcasts => ({
+    type: PodcastsTypes.FETCH_PODCASTS_SUCCESS,
     payload: podcasts,
 })
 
-export const nextPage = () => ({
-    type: NEXT_PAGE,
+export const fetchPodcastsFailure = error => ({
+    type: PodcastsTypes.FETCH_PODCASTS_SUCCESS,
+    payload: error,
 })
-
-export const startFetchPodcasts = () => ({
-    type: START_FETCH_PODCASTS,
-})
-
-export const fetchPodcasts = page => {
-    return async (dispatch, getState) => {
-        const lastFetchedPage = getState().podcasts.lastFetchedPage
-
-        if (page > lastFetchedPage) {
-            dispatch(startFetchPodcasts())
-
-            const { data } = await listenNotesApi.get(
-                `/best_podcasts?page=${page}`,
-            )
-
-            dispatch(addPodcasts(data))
-        }
-    }
-}

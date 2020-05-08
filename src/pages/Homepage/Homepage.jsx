@@ -7,7 +7,6 @@ import { fetchPodcasts, nextPage } from '../../redux/podcasts/podcastsActions'
 import {
     selectPodcasts,
     selectIsFetching,
-    selectCurrentPage,
     selectHasNextPage,
 } from '../../redux/podcasts/podcastsSelectors'
 import Button from '../../components/Button/Button'
@@ -17,14 +16,13 @@ import Spinner from '../../components/Spinner/Spinner'
 const Homepage = ({
     fetchPodcasts,
     nextPage,
-    page,
     hasNextPage,
     isFetching,
     podcasts,
 }) => {
     useEffect(() => {
-        fetchPodcasts(page)
-    }, [fetchPodcasts, page])
+        fetchPodcasts()
+    }, [fetchPodcasts])
 
     const loadMorePodcasts = () => {
         nextPage()
@@ -35,13 +33,7 @@ const Homepage = ({
             <Helmet>
                 <title>Home | Podcast Player</title>
             </Helmet>
-            {podcasts && (
-                <PodcastList
-                    needsLoadMoreButton
-                    podcasts={podcasts}
-                    loadMorePodcasts={loadMorePodcasts}
-                />
-            )}
+            {podcasts && <PodcastList podcasts={podcasts} />}
             {isFetching && <Spinner />}
             {!isFetching && hasNextPage && (
                 <Button onClick={loadMorePodcasts}>Load More</Button>
@@ -52,13 +44,12 @@ const Homepage = ({
 
 const mapStateToProps = createStructuredSelector({
     isFetching: selectIsFetching,
-    page: selectCurrentPage,
     podcasts: selectPodcasts,
     hasNextPage: selectHasNextPage,
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchPodcasts: page => dispatch(fetchPodcasts(page)),
+    fetchPodcasts: () => dispatch(fetchPodcasts()),
     nextPage: () => dispatch(nextPage()),
 })
 

@@ -10,7 +10,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const sagaMiddleware = createSagaMiddleware()
 
-const middlewares = [thunk]
+const middlewares = [thunk, sagaMiddleware]
 
 const store = createStore(
     rootReducer,

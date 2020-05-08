@@ -1,20 +1,21 @@
-import { ADD_PODCASTS, NEXT_PAGE, START_FETCH_PODCASTS } from './podcastsTypes'
+import PodcastsTypes from './podcastsTypes'
 
 const initialState = {
     isFetching: false,
     page: 1,
     lastFetchedPage: null,
     podcasts: [],
+    error: null,
 }
 
 const podcastsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case START_FETCH_PODCASTS:
+        case PodcastsTypes.FETCH_PODCASTS_START:
             return {
                 ...state,
                 isFetching: true,
             }
-        case ADD_PODCASTS:
+        case PodcastsTypes.FETCH_PODCASTS_SUCCESS:
             const { has_next, page_number, podcasts } = action.payload
 
             return {
@@ -23,8 +24,15 @@ const podcastsReducer = (state = initialState, action) => {
                 has_next,
                 lastFetchedPage: page_number,
                 podcasts: [...state.podcasts, ...podcasts],
+                error: null,
             }
-        case NEXT_PAGE:
+        case PodcastsTypes.FETCH_PODCASTS_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload,
+            }
+        case PodcastsTypes.NEXT_PAGE:
             return {
                 ...state,
                 page: state.page + 1,
