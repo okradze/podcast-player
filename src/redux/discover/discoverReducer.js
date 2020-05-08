@@ -1,20 +1,21 @@
-import { START_FETCH_LISTS, ADD_LISTS, NEXT_PAGE } from './discoverTypes'
+import DiscoverTypes from './discoverTypes'
 
 const initialState = {
     curated_lists: [],
     isFetching: false,
     page: 1,
     lastFetchedPage: null,
+    error: null,
 }
 
 const discoverReducer = (state = initialState, action) => {
     switch (action.type) {
-        case START_FETCH_LISTS:
+        case DiscoverTypes.FETCH_PODCAST_LISTS_START:
             return {
                 ...state,
                 isFetching: true,
             }
-        case ADD_LISTS:
+        case DiscoverTypes.FETCH_PODCAST_LISTS_SUCCESS:
             const { has_next, page_number, curated_lists } = action.payload
 
             return {
@@ -23,8 +24,14 @@ const discoverReducer = (state = initialState, action) => {
                 has_next,
                 lastFetchedPage: page_number,
                 curated_lists: [...state.curated_lists, ...curated_lists],
+                error: null,
             }
-        case NEXT_PAGE:
+        case DiscoverTypes.FETCH_PODCAST_LISTS_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            }
+        case DiscoverTypes.NEXT_PAGE:
             return {
                 ...state,
                 page: state.page + 1,

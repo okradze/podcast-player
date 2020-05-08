@@ -1,3 +1,10 @@
-export const START_FETCH_LISTS = 'discover/START_FETCH_LISTS'
-export const ADD_LISTS = 'discover/ADD_LISTS'
-export const NEXT_PAGE = 'discover/NEXT_PAGE'
+const DiscoverTypes = {
+    NEXT_PAGE: 'discover/NEXT_PAGE',
+
+    FETCH_PODCAST_LISTS: 'discover/FETCH_PODCAST_LISTS',
+    FETCH_PODCAST_LISTS_START: 'discover/FETCH_PODCAST_LISTS_START',
+    FETCH_PODCAST_LISTS_SUCCESS: 'discover/FETCH_PODCAST_LISTS_SUCCESS',
+    FETCH_PODCAST_LISTS_FAILURE: 'discover/FETCH_PODCAST_LISTS_FAILURE',
+}
+
+export default DiscoverTypes

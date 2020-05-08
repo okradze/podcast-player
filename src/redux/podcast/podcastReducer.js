@@ -1,11 +1,4 @@
-import {
-    START_FETCH_PODCAST,
-    START_FETCH_MORE_EPISODES,
-    START_FETCH_RECOMMENDATIONS,
-    SET_RECOMMENDATIONS,
-    SET_PODCAST,
-    SET_MORE_EPISODES,
-} from './podcastTypes'
+import PodcastTypes from './podcastTypes'
 
 const initialState = {
     podcast: null,
@@ -13,30 +6,36 @@ const initialState = {
     isPodcastFetching: false,
     areRecommendationsFetching: false,
     areEpisodesFetching: false,
+    error: null,
 }
 
 const podcastReducer = (state = initialState, action) => {
     switch (action.type) {
-        case START_FETCH_PODCAST:
+        case PodcastTypes.FETCH_PODCAST_START:
             return {
                 ...state,
                 isPodcastFetching: true,
             }
-
-        case START_FETCH_RECOMMENDATIONS:
-            return { ...state, areRecommendationsFetching: true }
-
-        case START_FETCH_MORE_EPISODES:
-            return { ...state, areEpisodesFetching: true }
-
-        case SET_PODCAST:
+        case PodcastTypes.FETCH_PODCAST_SUCCESS:
             return {
                 ...state,
                 isPodcastFetching: false,
                 podcast: action.payload,
+                error: null,
             }
 
-        case SET_MORE_EPISODES:
+        case PodcastTypes.FETCH_RECOMMENDATIONS_START:
+            return { ...state, areRecommendationsFetching: true }
+        case PodcastTypes.FETCH_RECOMMENDATIONS_SUCCESS:
+            return {
+                ...state,
+                areRecommendationsFetching: false,
+                recommendations: action.payload,
+            }
+
+        case PodcastTypes.FETCH_MORE_EPISODES_START:
+            return { ...state, areEpisodesFetching: true }
+        case PodcastTypes.FETCH_MORE_EPISODES_SUCCESS:
             return {
                 ...state,
                 areEpisodesFetching: false,
@@ -49,11 +48,12 @@ const podcastReducer = (state = initialState, action) => {
                 },
             }
 
-        case SET_RECOMMENDATIONS:
+        case PodcastTypes.FETCH_PODCAST_FAILURE:
+        case PodcastTypes.FETCH_RECOMMENDATIONS_FAILURE:
+        case PodcastTypes.FETCH_MORE_EPISODES_FAILURE:
             return {
                 ...state,
-                areRecommendationsFetching: false,
-                recommendations: action.payload,
+                error: action.payload,
             }
         default:
             return state

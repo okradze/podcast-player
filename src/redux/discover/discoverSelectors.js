@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const discover = state => state.discover
+export const discover = state => state.discover
 
 export const selectLists = createSelector(
     [discover],

@@ -1,13 +1,7 @@
-import {
-    PLAY_EPISODE,
-    PLAY,
-    PAUSE,
-    SET_VOLUME,
-    CURRENT_TIME,
-} from './playingTypes'
+import PlayingTypes from './playingTypes'
 
 export const playEpisode = (podcastId, episode) => ({
-    type: PLAY_EPISODE,
+    type: PlayingTypes.PLAY_EPISODE,
     payload: {
         podcastId,
         episode,
@@ -15,19 +9,19 @@ export const playEpisode = (podcastId, episode) => ({
 })
 
 export const setVolume = volume => ({
-    type: SET_VOLUME,
+    type: PlayingTypes.SET_VOLUME,
     payload: volume,
 })
 
 export const setCurrentTime = time => ({
-    type: CURRENT_TIME,
+    type: PlayingTypes.CURRENT_TIME,
     payload: time,
 })
 
 export const pause = () => ({
-    type: PAUSE,
+    type: PlayingTypes.PAUSE,
 })
 
 export const play = () => ({
-    type: PLAY,
+    type: PlayingTypes.PLAY,
 })
