@@ -1,10 +1,4 @@
-import {
-    PLAY_EPISODE,
-    PLAY,
-    PAUSE,
-    SET_VOLUME,
-    CURRENT_TIME,
-} from './playingTypes'
+import PlayingTypes from './playingTypes'
 
 const initialState = {
     podcastId: '',
@@ -16,20 +10,20 @@ const initialState = {
 
 const playingReducer = (state = initialState, action) => {
     switch (action.type) {
-        case PLAY_EPISODE:
+        case PlayingTypes.PLAY_EPISODE:
             return {
                 ...state,
                 currentTime: 0,
                 podcastId: action.payload.podcastId,
                 playingEpisode: action.payload.episode,
             }
-        case PLAY:
+        case PlayingTypes.PLAY:
             return { ...state, isPlaying: true }
-        case PAUSE:
+        case PlayingTypes.PAUSE:
             return { ...state, isPlaying: false }
-        case CURRENT_TIME:
+        case PlayingTypes.CURRENT_TIME:
             return { ...state, currentTime: action.payload }
-        case SET_VOLUME:
+        case PlayingTypes.SET_VOLUME:
             return {
                 ...state,
                 volume: action.payload,
