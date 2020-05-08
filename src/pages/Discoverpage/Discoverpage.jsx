@@ -19,15 +19,14 @@ import Spinner from '../../components/Spinner/Spinner'
 
 const Discoverpage = ({
     fetchPodcastLists,
-    page,
     isFetching,
     hasNextPage,
     lists,
     nextPage,
 }) => {
     useEffect(() => {
-        fetchPodcastLists(page)
-    }, [fetchPodcastLists, page])
+        fetchPodcastLists()
+    }, [fetchPodcastLists])
 
     const loadMoreLists = () => {
         nextPage()
@@ -58,7 +57,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchPodcastLists: page => dispatch(fetchPodcastLists(page)),
+    fetchPodcastLists: () => dispatch(fetchPodcastLists()),
     nextPage: () => dispatch(nextPage()),
 })
 
