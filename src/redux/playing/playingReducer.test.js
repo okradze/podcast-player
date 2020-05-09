@@ -1,44 +1,38 @@
-import playingReducer from './playingReducer'
-import {
-    setVolume,
-    setCurrentTime,
-    playEpisode,
-    play,
-    pause,
-} from './playingActions'
-
-const initialState = {
-    podcastId: '',
-    playingEpisode: null,
-    isPlaying: false,
-    volume: 1.0,
-    currentTime: 0,
-}
+import playingReducer, { initialState } from './playingReducer'
+import { setVolume, setCurrentTime, playEpisode, play, pause } from './playingActions'
 
 describe('playingReducer', () => {
-    it('should return initial state', () => {
-        expect(playingReducer(undefined, {})).toEqual(initialState)
+    test('return initial state', () => {
+        const state = playingReducer(undefined, {})
+        expect(state).toEqual(initialState)
     })
-    it('should set playing episode', () => {
-        expect(playingReducer(initialState, playEpisode('1', '1'))).toEqual({
+    test('playEpisode', () => {
+        const podcastId = '123'
+        const episode = 'data'
+        const state = playingReducer(initialState, playEpisode(podcastId, episode))
+        expect(state).toEqual({
             ...initialState,
             currentTime: 0,
-            podcastId: '1',
-            playingEpisode: '1',
+            podcastId,
+            playingEpisode: episode,
         })
     })
-    it('should set volume', () => {
-        expect(playingReducer(initialState, setVolume(0.9)).volume).toBe(0.9)
+    test('setVolume', () => {
+        const volume = 0.9
+        const state = playingReducer(initialState, setVolume(volume))
+        expect(state.volume).toEqual(volume)
     })
-    it('should play', () => {
-        expect(playingReducer(initialState, play()).isPlaying).toBe(true)
+    test('play', () => {
+        const state = playingReducer(initialState, play())
+        expect(state.isPlaying).toEqual(true)
     })
-    it('should pause', () => {
-        expect(playingReducer(initialState, pause()).isPlaying).toBe(false)
+    test('pause', () => {
+        const state = playingReducer(initialState, pause())
+        expect(state.isPlaying).toEqual(false)
     })
-    it('should set current time', () => {
-        expect(
-            playingReducer(initialState, setCurrentTime(100)).currentTime,
-        ).toBe(100)
+    test('setCurrentTime', () => {
+        const currentTime = 100
+        const state = playingReducer(initialState, setCurrentTime(currentTime))
+        expect(state.currentTime).toBe(currentTime)
     })
 })
