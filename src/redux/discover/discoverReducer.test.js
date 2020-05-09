@@ -1,48 +1,55 @@
-import { startFetchLists, addLists, nextPage } from './discoverActions'
-import discoverReducer from './discoverReducer'
-
-const initialState = {
-    curated_lists: [],
-    isFetching: false,
-    page: 1,
-    lastFetchedPage: null,
-}
+import {
+    nextPage,
+    fetchPodcastListsStart,
+    fetchPodcastListsSuccess,
+    fetchPodcastListsFailure,
+} from './discoverActions'
+import discoverReducer, { initialState } from './discoverReducer'
 
 describe('discoverReducer', () => {
-    it('should return initial state', () => {
-        expect(discoverReducer(undefined, {})).toEqual(initialState)
+    test('return initial state', () => {
+        const state = discoverReducer(undefined, {})
+        expect(state).toEqual(initialState)
     })
-
-    it('should set isFetching to true when starting fetching lists', () => {
-        expect(
-            discoverReducer(initialState, startFetchLists()).isFetching,
-        ).toBe(true)
+    test('fetchPodcastListsStart', () => {
+        const state = discoverReducer(initialState, fetchPodcastListsStart())
+        expect(state.isFetching).toEqual(true)
     })
+    test('fetchPodcastListsSuccess', () => {
+        const firstFetchedLists = [1, 2, 3]
+        const secondFetchedLists = [4, 5, 6]
 
-    it('should set isFetching to false and curated lists to payload when fetching done', () => {
         const mockLists = {
             has_next: true,
             page_number: 2,
-            curated_lists: [{}],
+            curated_lists: secondFetchedLists,
         }
 
-        expect(
-            discoverReducer(
-                { ...initialState, curated_lists: [{}] },
-                addLists(mockLists),
-            ),
-        ).toEqual({
+        const state = discoverReducer(
+            { ...initialState, curated_lists: firstFetchedLists },
+            fetchPodcastListsSuccess(mockLists),
+        )
+
+        expect(state).toEqual({
             ...initialState,
-            has_next: mockLists.has_next,
-            curated_lists: [{}, ...mockLists.curated_lists],
-            lastFetchedPage: mockLists.page_number,
             isFetching: false,
+            has_next: mockLists.has_next,
+            lastFetchedPage: mockLists.page_number,
+            curated_lists: [...firstFetchedLists, ...secondFetchedLists],
         })
     })
 
-    it('should increase page number', () => {
-        expect(discoverReducer(initialState, nextPage()).page).toBe(
-            initialState.page + 1,
+    test('fetchPodcastListsFailure', () => {
+        const error = 'error'
+        const state = discoverReducer(
+            initialState,
+            fetchPodcastListsFailure(error),
         )
+        expect(state.error).toEqual(error)
+    })
+
+    test('increase page number', () => {
+        const state = discoverReducer(initialState, nextPage())
+        expect(state.page).toEqual(initialState.page + 1)
     })
 })
