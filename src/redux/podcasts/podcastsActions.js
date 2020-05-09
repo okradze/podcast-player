@@ -18,6 +18,6 @@ export const fetchPodcastsSuccess = podcasts => ({
 })
 
 export const fetchPodcastsFailure = error => ({
-    type: PodcastsTypes.FETCH_PODCASTS_SUCCESS,
+    type: PodcastsTypes.FETCH_PODCASTS_FAILURE,
     payload: error,
 })

@@ -1,23 +1,39 @@
-import { START_FETCH_LISTS, ADD_LISTS, NEXT_PAGE } from './discoverTypes'
+import DiscoverTypes from './discoverTypes'
 import {
-    startFetchLists,
-    addLists,
-    nextPage,
     fetchPodcastLists,
+    fetchPodcastListsStart,
+    fetchPodcastListsSuccess,
+    fetchPodcastListsFailure,
+    nextPage,
 } from './discoverActions'
 
-it('should create startFetchLists action', () => {
-    expect(startFetchLists().type).toEqual(START_FETCH_LISTS)
+describe('fetchPodcastLists', () => {
+    test('fetchPodcastLists action', () => {
+        const action = fetchPodcastLists()
+        expect(action.type).toEqual(DiscoverTypes.FETCH_PODCAST_LISTS)
+    })
+
+    test('fetchPodcastListsStart action', () => {
+        const action = fetchPodcastListsStart()
+        expect(action.type).toEqual(DiscoverTypes.FETCH_PODCAST_LISTS_START)
+    })
+
+    test('fetchPodcastListsSuccess action', () => {
+        const podcasts = 'data'
+        const action = fetchPodcastListsSuccess(podcasts)
+        expect(action.type).toEqual(DiscoverTypes.FETCH_PODCAST_LISTS_SUCCESS)
+        expect(action.payload).toEqual(podcasts)
+    })
+
+    test('fetchPodcastListsFailure action', () => {
+        const error = 'error'
+        const action = fetchPodcastListsFailure(error)
+        expect(action.type).toEqual(DiscoverTypes.FETCH_PODCAST_LISTS_FAILURE)
+        expect(action.payload).toEqual(error)
+    })
 })
 
-it('should create addLists action', () => {
-    const mockPayload = {}
-    const action = addLists(mockPayload)
-
-    expect(action.type).toEqual(ADD_LISTS)
-    expect(action.payload).toEqual(mockPayload)
-})
-
-it('should create nextPage action', () => {
-    expect(nextPage().type).toEqual(NEXT_PAGE)
+test('nextPage action', () => {
+    const action = nextPage()
+    expect(action.type).toEqual(DiscoverTypes.NEXT_PAGE)
 })

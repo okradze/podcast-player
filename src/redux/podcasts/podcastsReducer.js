@@ -1,6 +1,6 @@
 import PodcastsTypes from './podcastsTypes'
 
-const initialState = {
+export const initialState = {
     isFetching: false,
     page: 1,
     lastFetchedPage: null,

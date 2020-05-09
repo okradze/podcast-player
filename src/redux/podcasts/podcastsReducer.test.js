@@ -1,42 +1,51 @@
-import { startFetchPodcasts, addPodcasts, nextPage } from './podcastsActions'
-import podcastsReducer from './podcastsReducer'
-
-const initialState = {
-    isFetching: false,
-    page: 1,
-    lastFetchedPage: null,
-    podcasts: [],
-}
+import {
+    nextPage,
+    fetchPodcastsStart,
+    fetchPodcastsSuccess,
+    fetchPodcastsFailure,
+} from './podcastsActions'
+import podcastsReducer, { initialState } from './podcastsReducer'
 
 describe('podcastsReducer', () => {
-    it('should return initial state', () => {
-        expect(podcastsReducer(undefined, {})).toEqual(initialState)
+    test('return initial state', () => {
+        const state = podcastsReducer(undefined, {})
+        expect(state).toEqual(initialState)
     })
-    it('should set isFetching to true when starting fetching podcasts', () => {
-        expect(
-            podcastsReducer(initialState, startFetchPodcasts()).isFetching,
-        ).toBe(true)
+    test('fetchPodcastsStart', () => {
+        const state = podcastsReducer(initialState, fetchPodcastsStart())
+        expect(state.isFetching).toEqual(true)
     })
-    it('should set isFetching to false and podcasts to payload when fetching done', () => {
-        const mockLists = { has_next: true, page_number: 2, podcasts: [{}] }
+    test('fetchPodcastsSuccess', () => {
+        const firstFetchedPodcasts = [1, 2, 3]
+        const secondFetchedPodcasts = [4, 5, 6]
 
-        expect(
-            podcastsReducer(
-                { ...initialState, podcasts: [{}] },
-                addPodcasts(mockLists),
-            ),
-        ).toEqual({
+        const mockLists = {
+            has_next: true,
+            page_number: 2,
+            podcasts: secondFetchedPodcasts,
+        }
+        const state = podcastsReducer(
+            { ...initialState, podcasts: firstFetchedPodcasts },
+            fetchPodcastsSuccess(mockLists),
+        )
+
+        expect(state).toEqual({
             ...initialState,
             isFetching: false,
             has_next: mockLists.has_next,
             lastFetchedPage: mockLists.page_number,
-            podcasts: [{}, ...mockLists.podcasts],
+            podcasts: [...firstFetchedPodcasts, ...secondFetchedPodcasts],
         })
     })
 
-    it('should increase page number', () => {
-        expect(podcastsReducer(initialState, nextPage()).page).toBe(
-            initialState.page + 1,
-        )
+    test('fetchPodcastsFailure', () => {
+        const error = 'error'
+        const state = podcastsReducer(initialState, fetchPodcastsFailure(error))
+        expect(state.error).toEqual(error)
+    })
+
+    test('increase page number', () => {
+        const state = podcastsReducer(initialState, nextPage())
+        expect(state.page).toEqual(initialState.page + 1)
     })
 })

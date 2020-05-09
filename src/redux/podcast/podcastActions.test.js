@@ -1,47 +1,99 @@
+import PodcastTypes from './podcastTypes'
 import {
-    START_FETCH_PODCAST,
-    START_FETCH_MORE_EPISODES,
-    START_FETCH_RECOMMENDATIONS,
-    SET_RECOMMENDATIONS,
-    SET_PODCAST,
-    SET_MORE_EPISODES,
-} from './podcastTypes'
-import {
-    startFetchPodcast,
-    startFetchMoreEpisodes,
-    startFetchRecommendations,
-    setPodcast,
-    setMoreEpisodes,
-    setRecommendations,
-    fetchMoreEpisodes,
     fetchPodcast,
+    fetchPodcastStart,
+    fetchPodcastSuccess,
+    fetchPodcastFailure,
     fetchRecommendations,
+    fetchRecommendationsStart,
+    fetchRecommendationsSuccess,
+    fetchRecommendationsFailure,
+    fetchMoreEpisodes,
+    fetchMoreEpisodesStart,
+    fetchMoreEpisodesSuccess,
+    fetchMoreEpisodesFailure,
 } from './podcastActions'
 
-it('should create startFetchPodcast action', () => {
-    expect(startFetchPodcast().type).toEqual(START_FETCH_PODCAST)
-})
-it('should create startFetchRecommendations action', () => {
-    expect(startFetchRecommendations().type).toEqual(
-        START_FETCH_RECOMMENDATIONS,
-    )
-})
-it('should create startFetchMoreEpisodes action', () => {
-    expect(startFetchMoreEpisodes().type).toEqual(START_FETCH_MORE_EPISODES)
+describe('fetchPodcast', () => {
+    test('fetchPodcast action', () => {
+        const podcastId = '123'
+        const action = fetchPodcast(podcastId)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_PODCAST)
+        expect(action.payload).toEqual(podcastId)
+    })
+    test('fetchPodcastStart action', () => {
+        const action = fetchPodcastStart()
+        expect(action.type).toEqual(PodcastTypes.FETCH_PODCAST_START)
+    })
+    test('fetchPodcastSuccess action', () => {
+        const podcast = 'data'
+        const action = fetchPodcastSuccess(podcast)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_PODCAST_SUCCESS)
+        expect(action.payload).toEqual(podcast)
+    })
+    test('fetchPodcastFailure action', () => {
+        const error = 'error'
+        const action = fetchPodcastFailure(error)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_PODCAST_FAILURE)
+        expect(action.payload).toEqual(error)
+    })
 })
 
-it('should create setPodcast action', () => {
-    const action = setPodcast({})
-    expect(action.type).toEqual(SET_PODCAST)
-    expect(action.payload).toEqual({})
+describe('fetchRecommendations', () => {
+    test('fetchRecommendations action', () => {
+        const podcastId = '123'
+        const action = fetchRecommendations(podcastId)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_RECOMMENDATIONS)
+        expect(action.payload).toEqual(podcastId)
+    })
+    test('fetchRecommendationsStart action', () => {
+        const action = fetchRecommendationsStart()
+        expect(action.type).toEqual(PodcastTypes.FETCH_RECOMMENDATIONS_START)
+    })
+    test('fetchRecommendationsSuccess action', () => {
+        const recommendations = 'data'
+        const action = fetchRecommendationsSuccess(recommendations)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_RECOMMENDATIONS_SUCCESS)
+        expect(action.payload).toEqual(recommendations)
+    })
+    test('fetchRecommendationsFailure action', () => {
+        const error = 'error'
+        const action = fetchRecommendationsFailure(error)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_RECOMMENDATIONS_FAILURE)
+        expect(action.payload).toEqual(error)
+    })
 })
-it('should create setRecommendations action', () => {
-    const action = setRecommendations({})
-    expect(action.type).toEqual(SET_RECOMMENDATIONS)
-    expect(action.payload).toEqual({})
-})
-it('should create setMoreEpisodes action', () => {
-    const action = setMoreEpisodes({})
-    expect(action.type).toEqual(SET_MORE_EPISODES)
-    expect(action.payload).toEqual({})
+
+describe('fetchMoreEpisodes', () => {
+    test('fetchMoreEpisodes action', () => {
+        const podcastId = '123'
+        const action = fetchMoreEpisodes(podcastId)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_MORE_EPISODES)
+        expect(action.payload).toEqual(podcastId)
+    })
+    test('fetchMoreEpisodesStart action', () => {
+        const action = fetchMoreEpisodesStart()
+        expect(action.type).toEqual(PodcastTypes.FETCH_MORE_EPISODES_START)
+    })
+    test('fetchMoreEpisodesSuccess action', () => {
+        const episodes = 'data'
+        const action = fetchMoreEpisodesSuccess(episodes)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_MORE_EPISODES_SUCCESS)
+        expect(action.payload).toEqual(episodes)
+    })
+    test('fetchMoreEpisodesFailure action', () => {
+        const error = 'error'
+        const action = fetchMoreEpisodesFailure(error)
+
+        expect(action.type).toEqual(PodcastTypes.FETCH_MORE_EPISODES_FAILURE)
+        expect(action.payload).toEqual(error)
+    })
 })

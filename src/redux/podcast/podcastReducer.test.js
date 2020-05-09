@@ -1,70 +1,104 @@
 import {
-    startFetchPodcast,
-    startFetchRecommendations,
-    startFetchMoreEpisodes,
-    setRecommendations,
-    setPodcast,
-    setMoreEpisodes,
+    fetchPodcastStart,
+    fetchPodcastSuccess,
+    fetchPodcastFailure,
+    fetchRecommendationsStart,
+    fetchRecommendationsSuccess,
+    fetchRecommendationsFailure,
+    fetchMoreEpisodesStart,
+    fetchMoreEpisodesSuccess,
+    fetchMoreEpisodesFailure,
 } from './podcastActions'
-import podcastReducer from './podcastReducer'
-
-const initialState = {
-    podcast: null,
-    recommendations: null,
-    isPodcastFetching: false,
-    areRecommendationsFetching: false,
-    areEpisodesFetching: false,
-}
+import podcastReducer, { initialState } from './podcastReducer'
 
 describe('podcastReducer', () => {
-    it('should return initial state', () => {
-        expect(podcastReducer(undefined, {})).toEqual(initialState)
+    test('return initial state', () => {
+        const state = podcastReducer(undefined, {})
+        expect(state).toEqual(initialState)
     })
-    it('should set isPodcastFetching to true when starting fetching podcast', () => {
-        expect(
-            podcastReducer(initialState, startFetchPodcast()).isPodcastFetching,
-        ).toBe(true)
-    })
-
-    it('should set areRecommendationsFetching to true when starting fetching recommendations', () => {
-        expect(
-            podcastReducer(initialState, startFetchRecommendations())
-                .areRecommendationsFetching,
-        ).toBe(true)
+    test('fetchPodcastStart', () => {
+        const state = podcastReducer(initialState, fetchPodcastStart())
+        expect(state.isPodcastFetching).toEqual(true)
     })
 
-    it('should set areEpisodesFetching to true when starting fetching episodes', () => {
-        expect(
-            podcastReducer(initialState, startFetchMoreEpisodes())
-                .areEpisodesFetching,
-        ).toBe(true)
-    })
-    it('should set podcast when fetching is done', () => {
-        expect(
-            podcastReducer(initialState, setPodcast({ episodes: [] })),
-        ).toEqual({
+    test('fetchPodcastSuccess', () => {
+        const podcast = 'data'
+        const state = podcastReducer(initialState, fetchPodcastSuccess(podcast))
+        expect(state).toEqual({
             ...initialState,
             isPodcastFetching: false,
-            podcast: { episodes: [] },
+            podcast,
+            error: null,
         })
     })
-    it('should set recommendations when fetching is done', () => {
-        expect(podcastReducer(initialState, setRecommendations([]))).toEqual({
+    test('fetchPodcastFailure', () => {
+        const error = 'error'
+        const state = podcastReducer(initialState, fetchPodcastFailure(error))
+        expect(state.error).toEqual(error)
+    })
+
+    test('fetchRecommendationsStart', () => {
+        const state = podcastReducer(initialState, fetchRecommendationsStart())
+        expect(state.areRecommendationsFetching).toEqual(true)
+    })
+
+    test('fetchRecommendationsSuccess', () => {
+        const recommendations = 'data'
+        const state = podcastReducer(
+            initialState,
+            fetchRecommendationsSuccess(recommendations),
+        )
+        expect(state).toEqual({
             ...initialState,
             areRecommendationsFetching: false,
-            recommendations: [],
+            recommendations,
+            error: null,
         })
     })
-    it('should set episodes when fetching is done', () => {
-        expect(
-            podcastReducer(
-                { ...initialState, podcast: { episodes: [{}] } },
-                setMoreEpisodes({ episodes: [{}] }),
-            ),
-        ).toEqual({
+    test('fetchRecommendationsFailure', () => {
+        const error = 'error'
+        const state = podcastReducer(
+            initialState,
+            fetchRecommendationsFailure(error),
+        )
+        expect(state.error).toEqual(error)
+    })
+
+    test('fetchMoreEpisodesStart', () => {
+        const state = podcastReducer(initialState, fetchMoreEpisodesStart())
+        expect(state.areEpisodesFetching).toEqual(true)
+    })
+
+    test('fetchMoreEpisodesSuccess', () => {
+        const firstFetchedPodcast = {
+            episodes: [1, 2, 3],
+        }
+        const secondFetchedPodcast = {
+            episodes: [4, 5, 6],
+        }
+        const state = podcastReducer(
+            { ...initialState, podcast: firstFetchedPodcast },
+            fetchMoreEpisodesSuccess(secondFetchedPodcast),
+        )
+        expect(state).toEqual({
             ...initialState,
             areEpisodesFetching: false,
-            podcast: { episodes: [{}, {}] },
+            podcast: {
+                ...secondFetchedPodcast,
+                episodes: [
+                    ...firstFetchedPodcast.episodes,
+                    ...secondFetchedPodcast.episodes,
+                ],
+            },
+            error: null,
         })
+    })
+    test('fetchMoreEpisodesFailure', () => {
+        const error = 'error'
+        const state = podcastReducer(
+            initialState,
+            fetchMoreEpisodesFailure(error),
+        )
+        expect(state.error).toEqual(error)
     })
 })

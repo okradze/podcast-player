@@ -1,6 +1,6 @@
 import DiscoverTypes from './discoverTypes'
 
-const initialState = {
+export const initialState = {
     curated_lists: [],
     isFetching: false,
     page: 1,

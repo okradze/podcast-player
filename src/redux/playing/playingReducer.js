@@ -1,6 +1,6 @@
 import PlayingTypes from './playingTypes'
 
-const initialState = {
+export const initialState = {
     podcastId: '',
     playingEpisode: null,
     isPlaying: false,
