@@ -8,24 +8,24 @@ import {
 } from './podcastsActions'
 
 describe('fetchPodcasts', () => {
-    it('should create fetchPodcasts action', () => {
+    test('fetchPodcasts action', () => {
         const action = fetchPodcasts()
         expect(action.type).toEqual(PodcastTypes.FETCH_PODCASTS)
     })
 
-    it('should create fetchPodcastsStart action', () => {
+    test('fetchPodcastsStart action', () => {
         const action = fetchPodcastsStart()
         expect(action.type).toEqual(PodcastTypes.FETCH_PODCASTS_START)
     })
 
-    it('should create fetchPodcastsSuccess action', () => {
+    test('fetchPodcastsSuccess action', () => {
         const podcasts = 'data'
         const action = fetchPodcastsSuccess(podcasts)
         expect(action.type).toEqual(PodcastTypes.FETCH_PODCASTS_SUCCESS)
         expect(action.payload).toEqual(podcasts)
     })
 
-    it('should create fetchPodcastsFailure action', () => {
+    test('fetchPodcastsFailure action', () => {
         const error = 'error'
         const action = fetchPodcastsFailure(error)
         expect(action.type).toEqual(PodcastTypes.FETCH_PODCASTS_FAILURE)
@@ -33,7 +33,7 @@ describe('fetchPodcasts', () => {
     })
 })
 
-it('should create nextPage action', () => {
+test('nextPage action', () => {
     const action = nextPage()
     expect(action.type).toEqual(PodcastTypes.NEXT_PAGE)
 })
