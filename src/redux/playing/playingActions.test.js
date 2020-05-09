@@ -1,10 +1,4 @@
-import {
-    PLAY_EPISODE,
-    PLAY,
-    PAUSE,
-    SET_VOLUME,
-    CURRENT_TIME,
-} from './playingTypes'
+import PlayingTypes from './playingTypes'
 import {
     playEpisode,
     setVolume,
@@ -14,27 +8,34 @@ import {
 } from './playingActions'
 
 it('should create playEpisode action', () => {
-    const action = playEpisode('1', '1')
-    expect(action.type).toEqual(PLAY_EPISODE)
-    expect(action.payload).toEqual({ podcastId: '1', episode: '1' })
+    const podcastId = '123'
+    const episode = 'data'
+    const action = playEpisode(podcastId, episode)
+
+    expect(action.type).toEqual(PlayingTypes.PLAY_EPISODE)
+    expect(action.payload).toEqual({ podcastId, episode })
 })
 
 it('should create setVolume action', () => {
-    const action = setVolume(1)
-    expect(action.type).toEqual(SET_VOLUME)
-    expect(action.payload).toEqual(1)
+    const volume = 0.5
+    const action = setVolume(volume)
+
+    expect(action.type).toEqual(PlayingTypes.SET_VOLUME)
+    expect(action.payload).toEqual(volume)
 })
 
 it('should create setCurrentTime action', () => {
-    const action = setCurrentTime(100)
-    expect(action.type).toEqual(CURRENT_TIME)
-    expect(action.payload).toEqual(100)
+    const currentTime = 100
+    const action = setCurrentTime(currentTime)
+
+    expect(action.type).toEqual(PlayingTypes.CURRENT_TIME)
+    expect(action.payload).toEqual(currentTime)
 })
 
 it('should create play action', () => {
-    expect(play().type).toEqual(PLAY)
+    expect(play().type).toEqual(PlayingTypes.PLAY)
 })
 
 it('should create pause action', () => {
-    expect(pause().type).toEqual(PAUSE)
+    expect(pause().type).toEqual(PlayingTypes.PAUSE)
 })
