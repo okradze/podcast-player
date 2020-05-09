@@ -1,6 +1,6 @@
 import PodcastTypes from './podcastTypes'
 
-const initialState = {
+export const initialState = {
     podcast: null,
     recommendations: null,
     isPodcastFetching: false,
@@ -31,6 +31,7 @@ const podcastReducer = (state = initialState, action) => {
                 ...state,
                 areRecommendationsFetching: false,
                 recommendations: action.payload,
+                error: null,
             }
 
         case PodcastTypes.FETCH_MORE_EPISODES_START:
@@ -46,6 +47,7 @@ const podcastReducer = (state = initialState, action) => {
                         ...action.payload.episodes,
                     ],
                 },
+                error: null,
             }
 
         case PodcastTypes.FETCH_PODCAST_FAILURE:
