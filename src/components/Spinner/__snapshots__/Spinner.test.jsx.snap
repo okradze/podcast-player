@@ -2,22 +2,23 @@
 
 exports[`should render Spinner component 1`] = `
 <div
-  className="SpinnerWrapper"
+  class="SpinnerWrapper"
+  data-testid="spinner"
 >
   <span
-    className="Spinner"
+    class="Spinner"
   >
     <span
-      className="SpinItem"
+      class="SpinItem"
     />
     <span
-      className="SpinItem"
+      class="SpinItem"
     />
     <span
-      className="SpinItem"
+      class="SpinItem"
     />
     <span
-      className="SpinItem"
+      class="SpinItem"
     />
   </span>
 </div>
