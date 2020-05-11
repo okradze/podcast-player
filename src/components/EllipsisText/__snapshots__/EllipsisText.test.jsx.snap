@@ -2,7 +2,7 @@
 
 exports[`should render EllipsisText component 1`] = `
 <span
-  className="Ellipsis "
+  class="Ellipsis "
 >
   Hello
 </span>
