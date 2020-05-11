@@ -1,6 +1,8 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { Button } from './Button'
+
+afterEach(cleanup)
 
 describe('Button', () => {
     const text = 'Hello'

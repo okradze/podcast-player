@@ -1,6 +1,8 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { EllipsisText } from './EllipsisText'
+
+afterEach(cleanup)
 
 it('should render EllipsisText component', () => {
     const text = 'Hello'
