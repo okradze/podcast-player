@@ -8,7 +8,7 @@ import { playEpisode } from '../../redux/playing/playingActions'
 import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import styles from './EpisodeItem.module.scss'
 
-const EpisodeItem = ({ match, playEpisode, episode }) => {
+export const EpisodeItem = ({ match, playEpisode, episode }) => {
     const { thumbnail, audio_length_sec, title } = episode
 
     return (

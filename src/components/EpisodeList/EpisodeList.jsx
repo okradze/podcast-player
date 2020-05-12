@@ -13,27 +13,27 @@ import Button from '../Button/Button'
 import Spinner from '../Spinner/Spinner'
 import styles from './EpisodeList.module.scss'
 
-const EpisodeList = ({
+export const EpisodeList = ({
     episodes,
     areEpisodesFetching,
     fetchMoreEpisodes,
     areMoreEpisodes,
 }) => (
-        <div>
-            {episodes && (
-                <div className={styles.List}>
-                    {episodes.map(episode => (
-                        <EpisodeItem key={episode.id} episode={episode} />
-                    ))}
-                </div>
-            )}
+    <div>
+        {episodes && (
+            <div data-testid='episodes' className={styles.List}>
+                {episodes.map(episode => (
+                    <EpisodeItem key={episode.id} episode={episode} />
+                ))}
+            </div>
+        )}
 
-            {areEpisodesFetching &&
-                <Spinner />}
-            {!areEpisodesFetching && areMoreEpisodes &&
-                <Button onClick={() => fetchMoreEpisodes()}>Load More</Button>}
-        </div>
-    )
+        {areEpisodesFetching && <Spinner />}
+        {!areEpisodesFetching && areMoreEpisodes && (
+            <Button onClick={() => fetchMoreEpisodes()}>Load More</Button>
+        )}
+    </div>
+)
 
 const mapStateToProps = createStructuredSelector({
     episodes: selectEpisodes,
