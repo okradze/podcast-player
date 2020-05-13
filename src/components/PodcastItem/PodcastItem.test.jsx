@@ -8,11 +8,12 @@ afterEach(cleanup)
 
 describe('PodcastItem', () => {
     test('match snapshot', () => {
-        const { asFragment } = render(
+        const { getByText } = render(
             <MemoryRouter>
                 <PodcastItem {...podcast} />
             </MemoryRouter>,
         )
-        expect(asFragment()).toMatchSnapshot()
+        getByText(podcast.title)
+        getByText(podcast.publisher)
     })
 })

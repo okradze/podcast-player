@@ -1,10 +1,12 @@
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { SearchBarItem } from './SearchBarItem'
 import searchResults from '../../fixtures/search'
 
 const mockPodcast = searchResults.podcasts[0]
+
+afterEach(cleanup)
 
 describe('SearchBarItem', () => {
     test('should render', () => {
