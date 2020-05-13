@@ -31,8 +31,9 @@ export const SearchBar = () => {
     return (
         <div className={styles.SearchBar}>
             <input
-                className={`${styles.Input} ${searchTerm &&
-                    styles.InputWhenSearching}`}
+                className={`${styles.Input} ${
+                    searchTerm && styles.InputWhenSearching
+                }`}
                 type='search'
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
