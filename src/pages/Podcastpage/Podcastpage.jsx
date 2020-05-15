@@ -63,7 +63,12 @@ const Podcastpage = ({
                         </div>
                         <div>
                             <h3 className={styles.Publisher}>{publisher}</h3>
-                            <p className={styles.Text}>{description}</p>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: description,
+                                }}
+                                className={styles.Text}
+                            />
                         </div>
                     </div>
 
