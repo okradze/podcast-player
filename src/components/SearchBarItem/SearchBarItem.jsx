@@ -10,7 +10,7 @@ export const SearchBarItem = ({
     title_original,
     clearSearch,
 }) => (
-    <li className={styles.Item} key={id}>
+    <li className={styles.Item}>
         <Link
             onClick={() => clearSearch()}
             to={`/podcast/${id}`}
