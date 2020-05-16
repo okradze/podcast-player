@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, createRef } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { Helmet } from 'react-helmet'
@@ -13,6 +13,7 @@ import {
     selectIsFetching,
     selectLists,
 } from '../../redux/discover/discoverSelectors'
+import useOnScreen from '../../hooks/useOnScreen'
 import Button from '../../components/Button/Button'
 import PodcastList from '../../components/PodcastList/PodcastList'
 import Spinner from '../../components/Spinner/Spinner'
@@ -24,13 +25,18 @@ const Discoverpage = ({
     lists,
     nextPage,
 }) => {
+    const infiniteScrollRef = createRef()
+    const isLoadMoreButtonOnScreen = useOnScreen(infiniteScrollRef)
+
     useEffect(() => {
         fetchPodcastLists()
     }, [fetchPodcastLists])
 
-    const loadMoreLists = () => {
-        nextPage()
-    }
+    useEffect(() => {
+        if (isLoadMoreButtonOnScreen) {
+            nextPage()
+        }
+    }, [isLoadMoreButtonOnScreen, nextPage])
 
     return (
         <div>
@@ -42,8 +48,11 @@ const Discoverpage = ({
                     <PodcastList key={id} title={title} podcasts={podcasts} />
                 ))}
             {isFetching && <Spinner />}
-            {hasNextPage && !isFetching && (
-                <Button onClick={() => loadMoreLists()}>Load More</Button>
+            {!isFetching && hasNextPage && (
+                <>
+                    <div style={{ minHeight: '1px' }} ref={infiniteScrollRef} />
+                    <Button onClick={() => nextPage()}>Load More</Button>
+                </>
             )}
         </div>
     )
