@@ -79,13 +79,18 @@ const AudioPlayer = ({
     }
 
     return (
-        <div className={`${styles.AudioPlayer} ${isMinimized ? styles.AudioPlayerMinimized : ''}`}>
+        <div
+            className={`${styles.AudioPlayer} ${
+                isMinimized ? styles.AudioPlayerMinimized : ''
+            }`}
+        >
             <div className={styles.MinimizeWrapper}>
                 <span
                     onClick={() => setIsMinimized(!isMinimized)}
                     tabIndex={0}
                     role='button'
-                    className={styles.Minimize} />
+                    className={styles.Minimize}
+                />
             </div>
 
             <div className={styles.EpisodeWrapper}>
@@ -106,12 +111,12 @@ const AudioPlayer = ({
                         className={styles.Pause}
                     />
                 ) : (
-                        <PlayButton
-                            tabIndex='0'
-                            onClick={() => audio.current.play()}
-                            className={styles.Play}
-                        />
-                    )}
+                    <PlayButton
+                        tabIndex='0'
+                        onClick={() => audio.current.play()}
+                        className={styles.Play}
+                    />
+                )}
 
                 {!isMinimized && (
                     <>
@@ -136,13 +141,14 @@ const AudioPlayer = ({
 
                             <span className={styles.Time}>
                                 -
-                        {formatTime(
-                                    audio.current.duration - audio.current.currentTime,
+                                {formatTime(
+                                    audio.current.duration -
+                                        audio.current.currentTime,
                                 )}
                             </span>
                         </div>
 
-                        <div tabIndex={0} className={styles.VolumeWrapper}>
+                        <div className={styles.VolumeWrapper}>
                             <div className={styles.VolumeSlider}>
                                 <Slider
                                     tabIndex={0}
@@ -160,7 +166,6 @@ const AudioPlayer = ({
                             </div>
                             <VolumeIcon className={styles.VolumeIcon} />
                         </div>
-
                     </>
                 )}
             </div>
