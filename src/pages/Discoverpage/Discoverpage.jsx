@@ -8,7 +8,6 @@ import {
     nextPage,
 } from '../../redux/discover/discoverActions'
 import {
-    selectCurrentPage,
     selectHasNextPage,
     selectIsFetching,
     selectLists,
@@ -59,10 +58,9 @@ const Discoverpage = ({
 }
 
 const mapStateToProps = createStructuredSelector({
-    page: selectCurrentPage,
-    hasNextPage: selectHasNextPage,
     isFetching: selectIsFetching,
     lists: selectLists,
+    hasNextPage: selectHasNextPage,
 })
 
 const mapDispatchToProps = dispatch => ({
