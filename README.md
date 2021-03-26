@@ -4,12 +4,13 @@ A web app for listening to podcasts. View the top podcasts, discover new podcast
 
 <p align="center">
   <img alt="Home" src="images/home.png" width="45%">
-&nbsp; &nbsp; &nbsp; &nbsp;
+  &nbsp; &nbsp; &nbsp;
   <img alt="Discover" src="images/discover.png" width="45%">
-&nbsp; &nbsp; &nbsp; &nbsp;
 </p>
 <p align="center">
   <img alt="Playing" src="images/playing.png" width="45%">
+  &nbsp; &nbsp; &nbsp;
+  <img alt="Playing" src="images/recommendations.png" width="45%">
 </p>
 
 ## Getting Started
