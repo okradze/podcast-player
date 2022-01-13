@@ -1836,7 +1836,7 @@
     lz-string "^1.4.4"
     pretty-format "^26.6.2"
 
-"@testing-library/jest-dom@^5.14.1":
+"@testing-library/jest-dom@^5.11.4":
   version "5.16.1"
   resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.16.1.tgz#3db7df5ae97596264a7da9696fe14695ba02e51f"
   integrity sha512-ajUJdfDIuTCadB79ukO+0l8O+QwN0LiSxDaYUTI4LndbbUsGi6rWU1SCexXzBA2NSjlVB9/vbkasQIL3tmPBjw==
@@ -1851,13 +1851,20 @@
     lodash "^4.17.15"
     redent "^3.0.0"
 
-"@testing-library/react@^11.2.7":
+"@testing-library/react@^11.1.0":
   version "11.2.7"
   resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.2.7.tgz#b29e2e95c6765c815786c0bc1d5aed9cb2bf7818"
   integrity sha512-tzRNp7pzd5QmbtXNG/mhdcl7Awfu/Iz1RaVHY75zTdOkmHCuzMhRL83gWHSgOAcjS3CCbyfwUHMZgRJb4kAfpA==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
+
+"@testing-library/user-event@^12.1.10":
+  version "12.8.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.8.3.tgz#1aa3ed4b9f79340a1e1836bc7f57c501e838704a"
+  integrity sha512-IR0iWbFkgd56Bu5ZI/ej8yQwrkCv8Qydx6RzwbKz9faXazR/+5tvYKsZQgyXJiwgpcva127YO6JcWy7YlCfofQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 "@tootallnate/once@1":
   version "1.1.2"
