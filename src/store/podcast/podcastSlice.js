@@ -37,11 +37,10 @@ export const podcastSlice = createSlice({
       state.areEpisodesFetching = true
     },
     setEpisodes(state, action) {
+      const episodes = state.podcast.episodes
       state.areEpisodesFetching = false
-      state.podcast.episodes = [
-        ...state.podcast.episodes,
-        ...action.payload.episodes,
-      ]
+      state.podcast = action.payload
+      state.podcast.episodes = [...episodes, ...action.payload.episodes]
       state.error = null
     },
   },
@@ -73,9 +72,7 @@ export const fetchRecommendations = async (dispatch, podcastId) => {
   try {
     dispatch(setRecommendationsLoading())
 
-    const { data } = await listenNotesApi.get(
-      `/podcasts/${podcastId}/recommendations`,
-    )
+    const { data } = await listenNotesApi.get(`/podcasts/${podcastId}/recommendations`)
     dispatch(setRecommendations(data.recommendations))
   } catch (error) {
     dispatch(setError(error))
@@ -89,7 +86,7 @@ export const fetchEpisodes = async (dispatch, podcastId, next_episode_pub_date) 
     const { data } = await listenNotesApi.get(
       `/podcasts/${podcastId}?next_episode_pub_date=${next_episode_pub_date}`,
     )
-    dispatch(setEpisodes(data.recommendations))
+    dispatch(setEpisodes(data))
   } catch (error) {
     dispatch(setError(error))
   }
