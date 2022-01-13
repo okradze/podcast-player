@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import Slider from 'rc-slider/lib/Slider'
 
+import { play, pause, setVolume, setCurrentTime } from '../../store/playingPodcast/playingPodcastSlice'
 import EllipsisText from '../EllipsisText/EllipsisText'
 import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import { ReactComponent as PauseButton } from '../../assets/pause-button.svg'
@@ -9,18 +11,11 @@ import { ReactComponent as VolumeIcon } from '../../assets/volume.svg'
 import styles from './AudioPlayer.module.scss'
 import 'rc-slider/assets/index.css'
 
-const AudioPlayer = ({
-    episode,
-    podcastId,
-    isPlaying,
-    currentTime,
-    volume,
-    play,
-    pause,
-    setVolume,
-    setCurrentTime,
-}) => {
+const AudioPlayer = () => {
     const [isMinimized, setIsMinimized] = useState(true)
+    const { episode, podcastId, isPlaying, currentTime, volume } = useSelector((state) => state.playingPodcast)
+    const dispatch = useDispatch()
+
     const { thumbnail, title, audio: audioSrc, audio_length_sec } = episode
     const audio = useRef(new Audio())
 
@@ -29,15 +24,15 @@ const AudioPlayer = ({
         audio.current.currentTime = currentTime
 
         const pauseEvent = audio.current.addEventListener('pause', () => {
-            pause()
+            dispatch(pause())
         })
         const playEvent = audio.current.addEventListener('play', () => {
-            play()
+            dispatch(play())
         })
         const timeUpdateEvent = audio.current.addEventListener(
             'timeupdate',
             () => {
-                setCurrentTime(audio.current.currentTime)
+                dispatch(setCurrentTime(audio.current.currentTime))
             },
         )
 
@@ -64,7 +59,7 @@ const AudioPlayer = ({
             audio.current.removeEventListener('timeupdate', timeUpdateEvent)
             window.removeEventListener('keydown', windowEvent)
         }
-    }, [audioSrc, play, pause, setCurrentTime])
+    }, [dispatch, audioSrc])
 
     const formatTime = time => {
         if (time) {
@@ -80,9 +75,8 @@ const AudioPlayer = ({
 
     return (
         <div
-            className={`${styles.AudioPlayer} ${
-                isMinimized ? styles.AudioPlayerMinimized : ''
-            }`}
+            className={`${styles.AudioPlayer} ${isMinimized ? styles.AudioPlayerMinimized : ''
+                }`}
         >
             <div className={styles.MinimizeWrapper}>
                 <span
@@ -143,7 +137,7 @@ const AudioPlayer = ({
                                 -
                                 {formatTime(
                                     audio.current.duration -
-                                        audio.current.currentTime,
+                                    audio.current.currentTime,
                                 )}
                             </span>
                         </div>

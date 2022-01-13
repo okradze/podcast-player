@@ -1,46 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector } from 'react-redux'
 import AudioPlayer from './AudioPlayer'
 
-import {
-    selectPlayingEpisode,
-    selectPlayingPodcastId,
-    selectIsPlaying,
-    selectVolume,
-    selectCurrentTime,
-} from '../../redux/playing/playingSelectors'
-import {
-    pause,
-    play,
-    setVolume,
-    setCurrentTime,
-} from '../../redux/playing/playingActions'
+const AudioPlayerContainer = () => {
+    const playingPodcast = useSelector((state) => state.playingPodcast)
 
-const AudioPlayerContainer = props => {
-    if (props.episode) {
-        return <AudioPlayer {...props} />
+    if (playingPodcast.episode) {
+        return <AudioPlayer />
     }
 
     return null
 }
 
-const mapStateToProps = createStructuredSelector({
-    episode: selectPlayingEpisode,
-    podcastId: selectPlayingPodcastId,
-    isPlaying: selectIsPlaying,
-    volume: selectVolume,
-    currentTime: selectCurrentTime,
-})
-
-const mapDispatchToProps = dispatch => ({
-    pause: () => dispatch(pause()),
-    play: () => dispatch(play()),
-    setVolume: volume => dispatch(setVolume(volume)),
-    setCurrentTime: time => dispatch(setCurrentTime(time)),
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(AudioPlayerContainer)
+export default AudioPlayerContainer
