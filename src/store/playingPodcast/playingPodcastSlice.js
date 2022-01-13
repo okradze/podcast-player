@@ -16,7 +16,7 @@ export const playingPodcastSlice = createSlice({
       const { podcastId, episode } = action.payload
       state.currentTime = 0
       state.podcastId = podcastId
-      state.episode = episode
+      state.playingEpisode = episode
     },
     setCurrentTime(state, action) {
       state.currentTime = action.payload
