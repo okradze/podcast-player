@@ -1,20 +1,48 @@
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import { render, screen, cleanup } from '@testing-library/react'
 import { EpisodeList } from './EpisodeList'
+import { createTestStore } from '../../utils/createTestStore'
+import { setEpisodesLoading, setPodcast } from '../../store/podcast/podcastSlice'
+import podcast from '../../fixtures/podcast'
+import { MemoryRouter } from 'react-router-dom'
 
 afterEach(cleanup)
 
+let store = createTestStore()
+
+beforeEach(() => {
+  store = createTestStore()
+})
+
 describe('EpisodeList', () => {
-  test('renders spinner when fetching', () => {
-    const { getByTestId, queryByText, queryByTestId } = render(
-      <EpisodeList areEpisodesFetching areMoreEpisodes />,
+  it('renders spinner when fetching', () => {
+    store.dispatch(setPodcast(podcast))
+    store.dispatch(setEpisodesLoading())
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <EpisodeList />
+        </MemoryRouter>
+      </Provider>,
     )
-    expect(getByTestId('spinner')).toBeInTheDocument()
-    expect(queryByText(/load more/i)).not.toBeInTheDocument()
-    expect(queryByTestId('episodes')).not.toBeInTheDocument()
+
+    expect(screen.getByTestId('spinner')).toBeInTheDocument()
+    expect(screen.queryByText(/load more/i)).not.toBeInTheDocument()
   })
-  test('renders load more button when more episodes are available and episodes are not fetching', () => {
-    const { getByText } = render(<EpisodeList areMoreEpisodes />)
-    expect(getByText(/load more/i)).toBeInTheDocument()
+
+  it('renders load more button when more episodes are available and episodes are not fetching', () => {
+    store.dispatch(setPodcast(podcast))
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <EpisodeList />
+        </MemoryRouter>
+      </Provider>,
+    )
+
+    expect(screen.getByText(/load more/i)).toBeInTheDocument()
   })
 })

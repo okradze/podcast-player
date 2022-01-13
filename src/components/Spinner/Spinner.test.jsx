@@ -1,10 +1,10 @@
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import { Spinner } from './Spinner'
 
 afterEach(cleanup)
 
 test('should render Spinner component', () => {
-  const { getByTestId } = render(<Spinner />)
-  expect(getByTestId('spinner')).toMatchSnapshot()
+  render(<Spinner />)
+  expect(screen.queryByTestId('spinner')).toBeInTheDocument()
 })

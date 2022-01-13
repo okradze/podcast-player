@@ -13,7 +13,7 @@ const persistConfig = {
   whitelist: ['playingPodcast'],
 }
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   podcasts: podcastsReducer,
   discoverPodcasts: discoverPodcastsReducer,
   podcast: podcastReducer,
