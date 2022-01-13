@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import EllipsisText from '../EllipsisText/EllipsisText'
 import { playEpisode } from '../../store/playingPodcast/playingPodcastSlice'
@@ -7,8 +7,9 @@ import { ReactComponent as PlayButton } from '../../assets/play-button.svg'
 import styles from './EpisodeItem.module.scss'
 import { useDispatch } from 'react-redux'
 
-export const EpisodeItem = ({ match, episode }) => {
+export const EpisodeItem = ({ episode }) => {
   const dispatch = useDispatch()
+  const { podcastId } = useParams()
   const { thumbnail, audio_length_sec, title } = episode
 
   return (
@@ -30,11 +31,11 @@ export const EpisodeItem = ({ match, episode }) => {
           role='button'
           tabIndex='0'
           className={styles.Play}
-          onClick={() => dispatch(playEpisode({ podcastId: match.params.podcastId, episode }))}
+          onClick={() => dispatch(playEpisode({ podcastId, episode }))}
         />
       </div>
     </div>
   )
 }
 
-export default withRouter(EpisodeItem)
+export default EpisodeItem
