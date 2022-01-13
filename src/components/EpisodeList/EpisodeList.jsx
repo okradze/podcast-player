@@ -8,7 +8,7 @@ import Spinner from '../Spinner/Spinner'
 import styles from './EpisodeList.module.scss'
 
 export const EpisodeList = () => {
-  const { podcast, areEpisodesFetching } = useSelector((state) => state.podcast)
+  const { podcast, areEpisodesFetching } = useSelector(state => state.podcast)
   const { episodes, id, next_episode_pub_date } = podcast
   const areMoreEpisodes = !!next_episode_pub_date
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ export const EpisodeList = () => {
     <div>
       {episodes && (
         <div data-testid='episodes' className={styles.List}>
-          {episodes.map((episode) => (
+          {episodes.map(episode => (
             <EpisodeItem key={episode.id} episode={episode} />
           ))}
         </div>

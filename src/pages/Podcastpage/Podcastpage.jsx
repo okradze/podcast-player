@@ -11,7 +11,7 @@ import styles from './Podcastpage.module.scss'
 const Podcastpage = ({ match }) => {
   const dispatch = useDispatch()
   const { podcast, isPodcastFetching, areRecommendationsFetching, recommendations } = useSelector(
-    (state) => state.podcast,
+    state => state.podcast,
   )
   const { podcastId } = match.params
 

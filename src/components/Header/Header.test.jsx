@@ -5,6 +5,6 @@ import { Header } from './Header'
 afterEach(cleanup)
 
 it('should render Header component', () => {
-    const { asFragment } = render(<Header />)
-    expect(asFragment()).toMatchSnapshot()
+  const { asFragment } = render(<Header />)
+  expect(asFragment()).toMatchSnapshot()
 })

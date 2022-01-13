@@ -17,7 +17,7 @@ import { ReactComponent as VolumeIcon } from '../../assets/volume.svg'
 import styles from './AudioPlayer.module.scss'
 import 'rc-slider/assets/index.css'
 
-const formatTime = (time) => {
+const formatTime = time => {
   if (time) {
     const SECONDS_IN_HOUR = 3600
     const date = new Date(Math.floor(time * 1000)).toISOString()
@@ -31,7 +31,7 @@ const formatTime = (time) => {
 
 const AudioPlayer = () => {
   const { playingEpisode, podcastId, isPlaying, currentTime, volume, minimized } = useSelector(
-    (state) => state.playingPodcast,
+    state => state.playingPodcast,
   )
   const dispatch = useDispatch()
 
@@ -56,7 +56,7 @@ const AudioPlayer = () => {
       dispatch(setCurrentTime(audio.currentTime))
     })
 
-    const windowEvent = window.addEventListener('keydown', (e) => {
+    const windowEvent = window.addEventListener('keydown', e => {
       if (e.code === 'Space' && e.target === document.body) {
         e.preventDefault()
       }
@@ -112,7 +112,7 @@ const AudioPlayer = () => {
 
               <div className={styles.Duration}>
                 <Slider
-                  onChange={(value) => {
+                  onChange={value => {
                     dispatch(setCurrentTime(value))
                     audio.currentTime = value
                   }}
@@ -131,7 +131,7 @@ const AudioPlayer = () => {
               <div className={styles.VolumeSlider}>
                 <Slider
                   tabIndex={0}
-                  onChange={(value) => {
+                  onChange={value => {
                     audio.volume = value
                     dispatch(setVolume(value))
                   }}

@@ -6,14 +6,14 @@ import { Sidebar } from './Sidebar'
 afterEach(cleanup)
 
 describe('Sidebar', () => {
-    test('render component', () => {
-        const { getByText, getAllByText } = render(
-            <MemoryRouter>
-                <Sidebar />
-            </MemoryRouter>,
-        )
-        getAllByText(/home$/i) // get navlink and not home.svg
-        getByText(/discover/i)
-        getByText(/now playing/i)
-    })
+  test('render component', () => {
+    const { getByText, getAllByText } = render(
+      <MemoryRouter>
+        <Sidebar />
+      </MemoryRouter>,
+    )
+    getAllByText(/home$/i) // get navlink and not home.svg
+    getByText(/discover/i)
+    getByText(/now playing/i)
+  })
 })

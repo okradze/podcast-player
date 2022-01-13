@@ -5,7 +5,7 @@ import { EllipsisText } from './EllipsisText'
 afterEach(cleanup)
 
 it('should render EllipsisText component', () => {
-    const text = 'Hello'
-    const { getByText } = render(<EllipsisText>{text}</EllipsisText>)
-    expect(getByText(text)).toMatchSnapshot()
+  const text = 'Hello'
+  const { getByText } = render(<EllipsisText>{text}</EllipsisText>)
+  expect(getByText(text)).toMatchSnapshot()
 })

@@ -5,6 +5,6 @@ import { Spinner } from './Spinner'
 afterEach(cleanup)
 
 test('should render Spinner component', () => {
-    const { getByTestId } = render(<Spinner />)
-    expect(getByTestId('spinner')).toMatchSnapshot()
+  const { getByTestId } = render(<Spinner />)
+  expect(getByTestId('spinner')).toMatchSnapshot()
 })

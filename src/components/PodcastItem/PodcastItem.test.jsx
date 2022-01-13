@@ -7,13 +7,13 @@ import podcast from '../../fixtures/podcast'
 afterEach(cleanup)
 
 describe('PodcastItem', () => {
-    test('match snapshot', () => {
-        const { getByText } = render(
-            <MemoryRouter>
-                <PodcastItem {...podcast} />
-            </MemoryRouter>,
-        )
-        getByText(podcast.title)
-        getByText(podcast.publisher)
-    })
+  test('match snapshot', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <PodcastItem {...podcast} />
+      </MemoryRouter>,
+    )
+    getByText(podcast.title)
+    getByText(podcast.publisher)
+  })
 })
