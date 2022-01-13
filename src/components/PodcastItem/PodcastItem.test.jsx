@@ -1,19 +1,19 @@
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { render, cleanup } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react'
 import { PodcastItem } from './PodcastItem'
 import podcast from '../../fixtures/podcast'
 
 afterEach(cleanup)
 
 describe('PodcastItem', () => {
-  test('match snapshot', () => {
-    const { getByText } = render(
+  it('renders title and publisher', () => {
+    render(
       <MemoryRouter>
         <PodcastItem {...podcast} />
       </MemoryRouter>,
     )
-    getByText(podcast.title)
-    getByText(podcast.publisher)
+    expect(screen.queryByText(podcast.title)).toBeInTheDocument()
+    expect(screen.queryByText(podcast.publisher)).toBeInTheDocument()
   })
 })
