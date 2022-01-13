@@ -1,71 +1,48 @@
 import React, { useEffect, createRef } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector, useDispatch } from 'react-redux'
 import { Helmet } from 'react-helmet'
 
 import {
     fetchPodcastLists,
     nextPage,
-} from '../../redux/discover/discoverActions'
-import {
-    selectHasNextPage,
-    selectIsFetching,
-    selectLists,
-} from '../../redux/discover/discoverSelectors'
+} from '../../store/discoverPodcasts/discoverPodcastsSlice'
 import useOnScreen from '../../hooks/useOnScreen'
-import Button from '../../components/Button/Button'
 import PodcastList from '../../components/PodcastList/PodcastList'
 import Spinner from '../../components/Spinner/Spinner'
 
-const Discoverpage = ({
-    fetchPodcastLists,
-    isFetching,
-    hasNextPage,
-    lists,
-    nextPage,
-}) => {
+const Discoverpage = () => {
+    const dispatch = useDispatch()
+    const { isFetching, curated_lists: lists, hasNextPage, lastFetchedPage, page } = useSelector(state => state.discoverPodcasts)
     const infiniteScrollRef = createRef()
     const isLoadMoreButtonOnScreen = useOnScreen(infiniteScrollRef)
 
     useEffect(() => {
-        fetchPodcastLists()
-    }, [fetchPodcastLists])
+        if (!isFetching) {
+            fetchPodcastLists(dispatch, page, lastFetchedPage)
+        }
+    }, [dispatch, page, lastFetchedPage, isFetching])
 
     useEffect(() => {
         if (isLoadMoreButtonOnScreen) {
-            nextPage()
+            dispatch(nextPage())
         }
-    }, [isLoadMoreButtonOnScreen, nextPage])
+    }, [dispatch, isLoadMoreButtonOnScreen])
 
     return (
         <div>
             <Helmet>
                 <title>Discover Podcasts | Podcast Player</title>
             </Helmet>
-            {lists &&
+            {lists.length > 0 &&
                 lists.map(({ id, title, podcasts }) => (
                     <PodcastList key={id} title={title} podcasts={podcasts} />
                 ))}
             {isFetching && <Spinner />}
             {!isFetching && hasNextPage && (
-                <>
-                    <div style={{ minHeight: '1px' }} ref={infiniteScrollRef} />
-                    <Button onClick={() => nextPage()}>Load More</Button>
-                </>
+                <div style={{ minHeight: '1px' }} ref={infiniteScrollRef} />
             )}
         </div>
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    isFetching: selectIsFetching,
-    lists: selectLists,
-    hasNextPage: selectHasNextPage,
-})
-
-const mapDispatchToProps = dispatch => ({
-    fetchPodcastLists: () => dispatch(fetchPodcastLists()),
-    nextPage: () => dispatch(nextPage()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Discoverpage)
+export default Discoverpage

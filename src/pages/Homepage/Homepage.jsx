@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner/Spinner'
 
 const Homepage = () => {
     const dispatch = useDispatch()
-    const { page, lastFetchedPage, isFetching, podcasts, hasNextPage } = useSelector((state) => state.podcasts)
+    const { page, lastFetchedPage, isFetching, podcasts, hasNextPage } = useSelector(state => state.podcasts)
     const infiniteScrollRef = createRef()
     const isLoadMoreButtonOnScreen = useOnScreen(infiniteScrollRef)
 
