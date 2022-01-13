@@ -1,5 +1,4 @@
 import React from 'react'
-
 import PodcastItem from '../PodcastItem/PodcastItem'
 import styles from './PodcastList.module.scss'
 
@@ -16,4 +15,4 @@ export const PodcastList = ({ podcasts, title }) => (
     </div>
 )
 
-export default PodcastList
+export default React.memo(PodcastList)

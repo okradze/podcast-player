@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector } from 'react-redux'
 
-import { selectPlayingPodcastId } from '../../redux/playing/playingSelectors'
 import { ReactComponent as HomeIcon } from '../../assets/home.svg'
 import { ReactComponent as SearchIcon } from '../../assets/search.svg'
 import { ReactComponent as PodcastIcon } from '../../assets/podcast.svg'
 import styles from './Sidebar.module.scss'
 
-export const Sidebar = ({ playingPodcastId }) => {
+export const Sidebar = () => {
+    const playingPodcastId = useSelector((state) => state.playingPodcast.podcastId)
     const [isSidebarVisible, setIsSidebarVisible] = useState(false)
 
     return (
@@ -22,15 +21,13 @@ export const Sidebar = ({ playingPodcastId }) => {
                 className={styles.Toggle}
             >
                 <span
-                    className={`${styles.ToggleIcon} ${
-                        isSidebarVisible ? styles.ToggleIconWhenVisible : ''
+                    className={`${styles.ToggleIcon} ${isSidebarVisible ? styles.ToggleIconWhenVisible : ''
                         }`}
                 />
             </span>
 
             <div
-                className={`${styles.Sidebar} ${
-                    isSidebarVisible ? styles.SidebarMobileVisible : ''
+                className={`${styles.Sidebar} ${isSidebarVisible ? styles.SidebarMobileVisible : ''
                     }`}
             >
                 <h1 className={styles.Logo}>
@@ -65,18 +62,20 @@ export const Sidebar = ({ playingPodcastId }) => {
                             </NavLink>
                         </li>
 
-                        <li className={styles.ListItem}>
-                            <NavLink
-                                to={`/podcast/${playingPodcastId}`}
-                                className={styles.Link}
-                                activeClassName={
-                                    playingPodcastId ? styles.ActiveLink : ''
-                                }
-                            >
-                                <PodcastIcon className={styles.LinkIcon} />
-                                Now Playing
-                            </NavLink>
-                        </li>
+                        {playingPodcastId && (
+                            <li className={styles.ListItem}>
+                                <NavLink
+                                    to={`/podcast/${playingPodcastId}`}
+                                    className={styles.Link}
+                                    activeClassName={
+                                        playingPodcastId ? styles.ActiveLink : ''
+                                    }
+                                >
+                                    <PodcastIcon className={styles.LinkIcon} />
+                                    Now Playing
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             </div>
@@ -84,8 +83,4 @@ export const Sidebar = ({ playingPodcastId }) => {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    playingPodcastId: selectPlayingPodcastId,
-})
-
-export default connect(mapStateToProps)(Sidebar)
+export default Sidebar
