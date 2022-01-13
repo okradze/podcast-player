@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
+  minimized: false,
   podcastId: '',
   playingEpisode: null,
   isPlaying: false,
@@ -12,6 +13,9 @@ export const playingPodcastSlice = createSlice({
   name: 'playingPodcast',
   initialState,
   reducers: {
+    toggleMinimize(state) {
+      state.minimized = !state.minimized
+    },
     playEpisode(state, action) {
       const { podcastId, episode } = action.payload
       state.currentTime = 0
@@ -33,6 +37,7 @@ export const playingPodcastSlice = createSlice({
   },
 })
 
-export const { playEpisode, setCurrentTime, setVolume, play, pause } = playingPodcastSlice.actions
+export const { playEpisode, setCurrentTime, setVolume, play, pause, toggleMinimize } =
+  playingPodcastSlice.actions
 
 export default playingPodcastSlice.reducer

@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 import AudioPlayer from './AudioPlayer'
 
 const AudioPlayerContainer = () => {
-    const playingPodcast = useSelector((state) => state.playingPodcast)
+  const episode = useSelector((state) => !!state.playingPodcast.playingEpisode)
 
-    if (playingPodcast.episode) {
-        return <AudioPlayer />
-    }
+  if (episode) {
+    return <AudioPlayer />
+  }
 
-    return null
+  return null
 }
 
 export default AudioPlayerContainer
