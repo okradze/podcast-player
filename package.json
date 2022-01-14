@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test --watchAll",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.jsx"
   },
@@ -38,7 +38,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "eslint-config-prettier": "^6.10.0",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
     "loader-utils": "^3.2.0",
     "prettier": "^2.5.1",
     "sass": "^1.47.0"
