@@ -12,7 +12,7 @@ export const Sidebar = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
 
   return (
-    <>
+    <aside>
       <span
         tabIndex={0}
         role='button'
@@ -25,7 +25,9 @@ export const Sidebar = () => {
         />
       </span>
 
-      <div className={`${styles.Sidebar} ${isSidebarVisible ? styles.SidebarMobileVisible : ''}`}>
+      <section
+        className={`${styles.Sidebar} ${isSidebarVisible ? styles.SidebarMobileVisible : ''}`}
+      >
         <h1 className={styles.Logo}>
           <Link to='/' className={styles.LogoLink}>
             Podcast
@@ -63,8 +65,8 @@ export const Sidebar = () => {
             )}
           </ul>
         </nav>
-      </div>
-    </>
+      </section>
+    </aside>
   )
 }
 

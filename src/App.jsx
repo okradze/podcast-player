@@ -13,20 +13,18 @@ const Podcastpage = lazy(() => import('./pages/Podcastpage/Podcastpage'))
 const App = () => (
   <BrowserRouter>
     <ErrorBoundary>
-      <div className='container'>
-        <div className='App'>
-          <Sidebar />
-          <AudioPlayerContainer />
-          <div className='main-page'>
-            <Header />
-            <Switch>
-              <Suspense fallback={<div />}>
-                <Route exact path='/' component={Homepage} />
-                <Route path='/discover' component={Discoverpage} />
-                <Route exact path='/podcast/:podcastId' component={Podcastpage} />
-              </Suspense>
-            </Switch>
-          </div>
+      <div className='container app'>
+        <Sidebar />
+        <AudioPlayerContainer />
+        <div className='main-page'>
+          <Header />
+          <Switch>
+            <Suspense fallback={<div />}>
+              <Route exact path='/' component={Homepage} />
+              <Route path='/discover' component={Discoverpage} />
+              <Route exact path='/podcast/:podcastId' component={Podcastpage} />
+            </Suspense>
+          </Switch>
         </div>
       </div>
     </ErrorBoundary>
