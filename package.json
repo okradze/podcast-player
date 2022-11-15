@@ -38,7 +38,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "eslint-config-prettier": "^6.10.0",
-    "loader-utils": "^3.2.0",
+    "loader-utils": "^3.2.1",
     "prettier": "^2.5.1",
     "sass": "^1.47.0"
   }
